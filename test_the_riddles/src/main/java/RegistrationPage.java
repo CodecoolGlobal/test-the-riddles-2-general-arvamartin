@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class RegistratePage {
+public class RegistrationPage {
 
     WebDriver driver;
     WebDriverWait wait;
@@ -15,9 +15,9 @@ public class RegistratePage {
     By userNameInput = By.xpath("/html/body/div/div/div[2]/div/div/div[2]/div[1]/input");
     By emailInput = By.xpath("/html/body/div/div/div[2]/div/div/div[2]/div[2]/input");
     By passWordInput = By.xpath("/html/body/div/div/div[2]/div/div/div[2]/div[3]/input");
-    By registrateBtn = By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[2]/button");
+    By registrationBtn = By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[2]/button");
 
-    public RegistratePage(WebDriver driver) {
+    public RegistrationPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
@@ -52,7 +52,7 @@ public class RegistratePage {
 
     public boolean clickToRegistrate(){
         try {
-            WebElement btn = wait.until(ExpectedConditions.visibilityOfElementLocated(registrateBtn));
+            WebElement btn = wait.until(ExpectedConditions.visibilityOfElementLocated(registrationBtn));
             btn.click();
             return true;
         }catch (Exception e){
