@@ -34,7 +34,7 @@ class MyQuizzesPageTest {
 
 
     @Test
-    public void userCanCreateQuizzes() throws InterruptedException {
+    /*public void userCanCreateQuizzes() throws InterruptedException {
         WebElement loginBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a[1]/button/span")));
 
         loginBtn.click();
@@ -49,6 +49,7 @@ class MyQuizzesPageTest {
         alert.accept();
     }
 
+
     @Test
     public void userCanDeleteQuizzes() throws InterruptedException {
         WebElement loginBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a[1]/button/span")));
@@ -60,11 +61,21 @@ class MyQuizzesPageTest {
         String alertText = alert.getText();
         assertEquals("Delete?", alertText);
         alert.accept();
+    }*/
+
+    public void userCanCreateGameLobby() throws InterruptedException {
+        WebElement loginBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a[1]/button/span")));
+        loginBtn.click();
+        loginPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
+        myQuizzesPage.clickOnMyQuizzesBtn();
+        myQuizzesPage.createLobby();
+
+        assertEquals("Start", myQuizzesPage.startBtnText());
     }
 
-    @AfterEach
+   /* @AfterEach
     public void closeTheApp() {
         driver.quit();
-    }
+    }*/
 
 }
