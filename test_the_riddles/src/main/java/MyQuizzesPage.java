@@ -16,6 +16,9 @@ public class MyQuizzesPage {
     By addQuizBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/button");
     By addQuestionBtn = By.xpath("//*[@id=\"root\"]/div/div[2]/div/div[1]/button");
     By questionTitleInput = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[1]/input");
+    By answerInputOne = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[3]/div[2]/div/div[1]/input");
+    By getAnswerInputTwo = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[3]/div[3]/div/div[1]/input");
+    By saveBtn = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[4]/button[1]");
 
 
     public MyQuizzesPage(WebDriver driver) {
@@ -25,7 +28,7 @@ public class MyQuizzesPage {
 
 
     public void clickOnMyQuizzesBtn() throws InterruptedException {
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         WebElement btn = driver.findElement(myQuizzesBtn);
         btn.click();
     }
@@ -34,13 +37,17 @@ public class MyQuizzesPage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(addQuizBtn)).click();
     }
 
-    public void clickOnAddQuestionBtn() {
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div[1]/button"))).click();
+    public void clickOnAddQuestionBtn() throws InterruptedException {
+        Thread.sleep(2000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(addQuestionBtn)).click();
+
     }
 
-
-    public void createAQuestion(String questionTitle){
+    public void fillAndSaveTheQuestionModal (String questionTitle, String answerOne, String answerTwo){
         wait.until(ExpectedConditions.visibilityOfElementLocated(questionTitleInput)).sendKeys(questionTitle);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(answerInputOne)).sendKeys(answerOne);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(getAnswerInputTwo)).sendKeys(answerTwo);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(saveBtn)).click();
     }
 
 

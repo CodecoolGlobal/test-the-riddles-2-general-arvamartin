@@ -28,7 +28,7 @@ public class LoginPage {
     }
 
     public void fillTheUsername(String username) throws InterruptedException {
-        Thread.sleep(4000);
+        Thread.sleep(3000);
         WebElement input = wait.until(ExpectedConditions.visibilityOfElementLocated(usernameInput));
         input.sendKeys(username);
     }

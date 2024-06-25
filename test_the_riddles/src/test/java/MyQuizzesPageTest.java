@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 
 class MyQuizzesPageTest {
 
@@ -39,7 +39,7 @@ class MyQuizzesPageTest {
         myQuizzesPage.clickOnMyQuizzesBtn();
         myQuizzesPage.clickOnAddQuizBtn();
         myQuizzesPage.clickOnAddQuestionBtn();
-        myQuizzesPage.createAQuestion("test");
+        myQuizzesPage.fillAndSaveTheQuestionModal("test", "test", "test");
     }
 
 
