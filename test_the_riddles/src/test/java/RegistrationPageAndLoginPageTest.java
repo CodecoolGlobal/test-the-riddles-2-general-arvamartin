@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import static com.google.common.base.StandardSystemProperty.USER_NAME;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RegistrationPageAndLoginPageTest {
@@ -23,27 +24,39 @@ class RegistrationPageAndLoginPageTest {
         registrationPage = new RegistrationPage(driver);
         loginPage = new LoginPage(driver);
         driver.manage().window().maximize();
-        assertTrue(registrationPage.clickToSignUp());
+
     }
 
     @Test
-    public void UserCanRegistrateAndLoginWithTheChosenCredentials() throws InterruptedException {
+    public void userCanRegistrateAndLoginWithTheChosenCredentials() throws InterruptedException {
 
         assertTrue(registrationPage.clickToSignUp());
 
-        String username = registrationPage.fillTheUserName("test");
-        registrationPage.fillTheUserEmail("test");
-        String password = registrationPage.fillTheUserPassword("test");
+        String username = registrationPage.fillTheUserName(System.getenv("USER_NAME"));
+        registrationPage.fillTheUserEmail(System.getenv("EMAIL"));
+        String password = registrationPage.fillTheUserPassword(System.getenv("PASSWORD"));
 
         assertTrue(registrationPage.clickToRegistrate());
 
-        loginPage.fillTheUsername(username);
-        loginPage.fillThePassword(password);
-        loginPage.clickOnLoginBtn();
+       loginPage.login(username, password);
         
         assertEquals("Logout", loginPage.findLogoutBtn().getText());
     }
 
+    @Test
+    public void userCanRegistrateOnlyWithProperEmailAddress() throws InterruptedException {
+        assertTrue(registrationPage.clickToSignUp());
+
+        String username = registrationPage.fillTheUserName(System.getenv("USER_NAME"));
+        registrationPage.fillTheUserEmail("test");
+        String password = registrationPage.fillTheUserPassword(System.getenv("PASSWORD"));
+
+        assertTrue(registrationPage.clickToRegistrate());
+
+        loginPage.login(username, password);
+
+        assertNotEquals("Logout", loginPage.findLogoutBtn().getText());
+    }
 
     @AfterEach
     public void closeTheApp(){
