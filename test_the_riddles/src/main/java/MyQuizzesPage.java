@@ -25,7 +25,7 @@ public class MyQuizzesPage {
 
 
     public void clickOnMyQuizzesBtn() throws InterruptedException {
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         WebElement btn = driver.findElement(myQuizzesBtn);
         btn.click();
     }
@@ -34,15 +34,8 @@ public class MyQuizzesPage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(addQuizBtn)).click();
     }
 
-    public boolean clickOnAddQuestionBtn() {
-              try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(addQuestionBtn)).click();
-            System.out.println("Clicked on Add Question button.");
-            return true;
-        } catch (Exception e) {
-            System.err.println("Error clicking on Add Question button: " + e.getMessage());
-            return false;
-        }
+    public void clickOnAddQuestionBtn() {
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div[1]/button"))).click();
     }
 
 

@@ -38,13 +38,10 @@ class MyQuizzesPageTest {
         loginPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
         myQuizzesPage.clickOnMyQuizzesBtn();
         myQuizzesPage.clickOnAddQuizBtn();
-        assertTrue(myQuizzesPage.clickOnAddQuestionBtn());
+        myQuizzesPage.clickOnAddQuestionBtn();
         myQuizzesPage.createAQuestion("test");
     }
 
-    @AfterEach
-    public void closeTheApp(){
-        driver.quit();
-    }
+
 
 }
