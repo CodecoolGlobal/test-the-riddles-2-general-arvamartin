@@ -23,23 +23,23 @@ class MyQuizzesPageTest {
 
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws InterruptedException {
         driver = new EdgeDriver();
         driver.get("http://localhost:3000");
         loginPage = new LoginPage(driver);
         myQuizzesPage = new MyQuizzesPage(driver);
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+
+        WebElement loginBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a[1]/button/span")));
+        loginBtn.click();
+        loginPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
+        myQuizzesPage.clickOnMyQuizzesBtn();
     }
 
 
     @Test
     public void userCanCreateQuizzes() throws InterruptedException {
-        WebElement loginBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a[1]/button/span")));
-
-        loginBtn.click();
-        loginPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
-        myQuizzesPage.clickOnMyQuizzesBtn();
         myQuizzesPage.clickOnAddQuizBtn();
         myQuizzesPage.clickOnAddQuestionBtn();
         myQuizzesPage.fillAndSaveTheQuestionModal("test", "test", "test");
@@ -51,11 +51,7 @@ class MyQuizzesPageTest {
 
 
     @Test
-    public void userCanDeleteQuizzes() throws InterruptedException {
-        WebElement loginBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a[1]/button/span")));
-        loginBtn.click();
-        loginPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
-        myQuizzesPage.clickOnMyQuizzesBtn();
+    public void userCanDeleteQuizzes() {
         myQuizzesPage.deleteQuiz();
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         String alertText = alert.getText();
@@ -64,13 +60,26 @@ class MyQuizzesPageTest {
     }
 
     @Test
-    public void userCanCreateGameLobby() throws InterruptedException {
-        WebElement loginBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a[1]/button/span")));
-        loginBtn.click();
-        loginPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
-        myQuizzesPage.clickOnMyQuizzesBtn();
-        myQuizzesPage.createLobby();
+    public void userCanModifyTitleOfExistingQuizzes() {
+        myQuizzesPage.modifyQuizTitle("new-test");
+        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        String alertText = alert.getText();
+        assertEquals("Save changes?", alertText);
+        alert.accept();
+    }
 
+    @Test
+    public void userCanModifyTitleOfExistingQuestions() throws InterruptedException {
+        myQuizzesPage.modifyQuestion("newQuestionTitle");
+        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        String alertText = alert.getText();
+        assertEquals("Save changes?", alertText);
+        alert.accept();
+    }
+
+    @Test
+    public void userCanCreateGameLobby() {
+        myQuizzesPage.createLobby();
         assertEquals("Start", myQuizzesPage.startBtnText());
     }
 
@@ -78,5 +87,4 @@ class MyQuizzesPageTest {
     public void closeTheApp() {
         driver.quit();
     }
-
 }

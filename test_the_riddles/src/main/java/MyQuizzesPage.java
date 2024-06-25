@@ -24,6 +24,12 @@ public class MyQuizzesPage {
     By checkBoxOne = By.xpath("//*[@id=\"checkbox-1\"]");
     By checkBoxTwo = By.xpath("//*[@id=\"checkbox-2\"]");
     By timer = By.xpath("//*[@id=\"-1time\"]");
+    By editBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/div/button[2]");
+    By quizTitleInput = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[1]/input");
+    By saveNewQuizTitle = By.xpath("/html/body/div/div/div[2]/div/div[2]/button[1]");
+    By questionBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/div/button");
+    By questionInput = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[1]/input");
+    By saveEditedQuestionBtn = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[4]/button[1]");
 
 
     public MyQuizzesPage(WebDriver driver) {
@@ -58,6 +64,19 @@ public class MyQuizzesPage {
 
     public void deleteQuiz(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(deleteBtn)).click();
+    }
+
+    public void modifyQuizTitle(String newTitle){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(editBtn)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(quizTitleInput)).sendKeys(newTitle);
+        wait.until(ExpectedConditions.elementToBeClickable(saveNewQuizTitle)).click();
+    }
+
+    public void modifyQuestion(String newQuestion) throws InterruptedException {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(editBtn)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(questionBtn)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(questionInput)).sendKeys(newQuestion);
+        wait.until(ExpectedConditions.elementToBeClickable(saveEditedQuestionBtn)).click();
     }
 
 

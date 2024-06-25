@@ -29,17 +29,13 @@ class RegistrationPageAndLoginPageTest {
 
     @Test
     public void userCanRegistrateAndLoginWithTheChosenCredentials() throws InterruptedException {
-
         assertTrue(registrationPage.clickToSignUp());
 
         String username = registrationPage.fillTheUserName(System.getenv("USER_NAME"));
         registrationPage.fillTheUserEmail(System.getenv("EMAIL"));
         String password = registrationPage.fillTheUserPassword(System.getenv("PASSWORD"));
-
         assertTrue(registrationPage.clickToRegistrate());
-
        loginPage.login(username, password);
-        
         assertEquals("Logout", loginPage.findLogoutBtn().getText());
     }
 
@@ -50,11 +46,8 @@ class RegistrationPageAndLoginPageTest {
         String username = registrationPage.fillTheUserName(System.getenv("USER_NAME"));
         registrationPage.fillTheUserEmail("test");
         String password = registrationPage.fillTheUserPassword(System.getenv("PASSWORD"));
-
         assertTrue(registrationPage.clickToRegistrate());
-
         loginPage.login(username, password);
-
         assertNotEquals("Logout", loginPage.findLogoutBtn().getText());
     }
 
