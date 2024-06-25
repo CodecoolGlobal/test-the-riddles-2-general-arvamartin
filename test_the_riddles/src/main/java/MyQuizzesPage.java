@@ -20,6 +20,9 @@ public class MyQuizzesPage {
     By getAnswerInputTwo = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[3]/div[3]/div/div[1]/input");
     By saveBtn = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[4]/button[1]");
     By deleteBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/div[1]/button[1]");
+    By playBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/div/button[3]");
+    By createGameLobbyBtn = By.xpath("/html/body/div/div/button");
+    By startBtn = By.xpath("/html/body/div/div/div/div[2]/button");
 
 
     public MyQuizzesPage(WebDriver driver) {
@@ -54,6 +57,24 @@ public class MyQuizzesPage {
 
     public void deleteQuiz(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(deleteBtn)).click();
+    }
+
+
+    public void createLobby(){
+        clickOnPlayBtn();
+        clickOnCreateGameLobbyBtn();
+    }
+
+    public void clickOnPlayBtn(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(playBtn)).click();
+    }
+
+    public void clickOnCreateGameLobbyBtn(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(createGameLobbyBtn)).click();
+    }
+
+    public String startBtnText(){
+       return wait.until(ExpectedConditions.visibilityOfElementLocated(startBtn)).getText();
     }
 
 
