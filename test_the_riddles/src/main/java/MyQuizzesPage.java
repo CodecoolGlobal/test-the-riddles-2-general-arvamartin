@@ -21,6 +21,9 @@ public class MyQuizzesPage {
     By playBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/div/button[3]");
     By createGameLobbyBtn = By.xpath("/html/body/div/div/button");
     By startBtn = By.xpath("/html/body/div/div/div/div[2]/button");
+    By checkBoxOne = By.xpath("//*[@id=\"checkbox-1\"]");
+    By checkBoxTwo = By.xpath("//*[@id=\"checkbox-2\"]");
+    By timer = By.xpath("//*[@id=\"-1time\"]");
 
 
     public MyQuizzesPage(WebDriver driver) {
@@ -76,4 +79,16 @@ public class MyQuizzesPage {
     }
 
 
+    public void chooseCheckBoxOne() {
+        wait.until(ExpectedConditions.elementToBeClickable(checkBoxOne)).click();
+    }
+
+    public void chooseCheckBoxTwo() {
+        wait.until(ExpectedConditions.elementToBeClickable(checkBoxTwo)).click();
+    }
+
+    public void setTimer(String time) {
+        wait.until(ExpectedConditions.elementToBeClickable(timer)).clear();
+        wait.until(ExpectedConditions.elementToBeClickable(timer)).sendKeys(time);
+    }
 }
