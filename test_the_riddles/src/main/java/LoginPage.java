@@ -21,7 +21,11 @@ public class LoginPage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-
+    public void login(String username, String password) throws InterruptedException {
+        fillTheUsername(username);
+        fillThePassword(password);
+        clickOnLoginBtn();
+    }
 
     public void fillTheUsername(String username) throws InterruptedException {
         Thread.sleep(4000);
