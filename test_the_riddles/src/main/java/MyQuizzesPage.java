@@ -19,6 +19,7 @@ public class MyQuizzesPage {
     By answerInputOne = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[3]/div[2]/div/div[1]/input");
     By getAnswerInputTwo = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[3]/div[3]/div/div[1]/input");
     By saveBtn = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[4]/button[1]");
+    By deleteBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/div[1]/button[1]");
 
 
     public MyQuizzesPage(WebDriver driver) {
@@ -48,6 +49,11 @@ public class MyQuizzesPage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(answerInputOne)).sendKeys(answerOne);
         wait.until(ExpectedConditions.visibilityOfElementLocated(getAnswerInputTwo)).sendKeys(answerTwo);
         wait.until(ExpectedConditions.visibilityOfElementLocated(saveBtn)).click();
+    }
+
+
+    public void deleteQuiz(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(deleteBtn)).click();
     }
 
 
