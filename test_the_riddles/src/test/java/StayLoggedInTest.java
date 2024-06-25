@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -40,6 +41,11 @@ class StayLoggedInTest {
         Thread.sleep(2000);
         String actual = webDriver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/nav/div/div[2]/a/button/span")).getText();
         assertEquals(actual,result);
+    }
+
+    @AfterEach
+    public void closeTheApp() {
+        webDriver.quit();
     }
 
 }
