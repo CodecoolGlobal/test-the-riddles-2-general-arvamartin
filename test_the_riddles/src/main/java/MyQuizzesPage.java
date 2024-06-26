@@ -30,6 +30,8 @@ public class MyQuizzesPage {
     By questionBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/div/button");
     By questionInput = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[1]/input");
     By saveEditedQuestionBtn = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[4]/button[1]");
+    By gameBtn = By.xpath("//*[@id=\"root\"]/div/div[1]/nav/div/div[1]/ul/li[1]/a/span");
+    By joinGameBtn = By.xpath("//*[@id=\"root\"]/div/div[2]/div/div[1]/div/button");
 
 
     public MyQuizzesPage(WebDriver driver) {
@@ -109,5 +111,10 @@ public class MyQuizzesPage {
     public void setTimer(String time) {
         wait.until(ExpectedConditions.elementToBeClickable(timer)).clear();
         wait.until(ExpectedConditions.elementToBeClickable(timer)).sendKeys(time);
+    }
+
+    public void joinGame() {
+        wait.until(ExpectedConditions.elementToBeClickable(gameBtn)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(joinGameBtn)).click();
     }
 }
