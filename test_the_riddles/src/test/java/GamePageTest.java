@@ -3,7 +3,6 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -14,7 +13,8 @@ public class GamePageTest {
 
     WebDriver driver;
     WebDriver driver2;
-    WebDriverWait wait;
+    WebDriverWait wait1;
+    WebDriverWait wait2;
     LoginPage loginPage1;
     LoginPage loginPage2;
     MyQuizzesPage myQuizzesPage1;
@@ -32,21 +32,26 @@ public class GamePageTest {
         myQuizzesPage2 = new MyQuizzesPage(driver2);
         driver.manage().window().maximize();
         driver2.manage().window().maximize();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-        wait = new WebDriverWait(driver2, Duration.ofSeconds(3));
+        wait1 = new WebDriverWait(driver, Duration.ofSeconds(3));
+        wait2 = new WebDriverWait(driver2, Duration.ofSeconds(3));
 
-        WebElement loginBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a[1]/button/span")));
-        loginBtn.click();
+        WebElement loginBtn1 = wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a[1]/button/span")));
+        WebElement loginBtn2 = wait2.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a[1]/button/span")));
+        loginBtn1.click();
+        loginBtn2.click();
         loginPage1.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
-        loginPage1.login(System.getenv("USER_NAME2"), System.getenv("PASSWORD2"));
+        loginPage2.login(System.getenv("USER_NAME2"), System.getenv("PASSWORD2"));
 
     }
 
     @Test
     void testGamePage() throws InterruptedException {
             myQuizzesPage1.clickOnMyQuizzesBtn();
-            myQuizzesPage1.clickOnMyQuizzesBtn();
+            myQuizzesPage1.createLobby();
+            myQuizzesPage2.joinGameLobby();
             myQuizzesPage2.joinGame();
+            myQuizzesPage1.startGame();
+
     }
 
 }

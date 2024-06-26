@@ -31,7 +31,10 @@ public class MyQuizzesPage {
     By questionInput = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[1]/input");
     By saveEditedQuestionBtn = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[4]/button[1]");
     By gameBtn = By.xpath("//*[@id=\"root\"]/div/div[1]/nav/div/div[1]/ul/li[1]/a/span");
-    By joinGameBtn = By.xpath("//*[@id=\"root\"]/div/div[2]/div/div[1]/div/button");
+    By joinGameLobbyBtn = By.xpath("//*[@id=\"root\"]/div/div[2]/div/div[1]/div/button");
+    By joinGameBtn = By.xpath("//*[@id=\"root\"]/div/div/div[2]/button");
+    By goodAnswerBtn = By.xpath("//*[@id=\"1\"]/p");
+
 
 
     public MyQuizzesPage(WebDriver driver) {
@@ -113,8 +116,21 @@ public class MyQuizzesPage {
         wait.until(ExpectedConditions.elementToBeClickable(timer)).sendKeys(time);
     }
 
-    public void joinGame() {
+    public void joinGameLobby() throws InterruptedException {
+        Thread.sleep(1000);
         wait.until(ExpectedConditions.elementToBeClickable(gameBtn)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(joinGameLobbyBtn)).click();
+    }
+
+    public void  startGame() {
+        wait.until(ExpectedConditions.elementToBeClickable(startBtn)).click();
+    }
+
+    public void joinGame() {
         wait.until(ExpectedConditions.elementToBeClickable(joinGameBtn)).click();
+    }
+
+    public void chooseGoodAnswer() {
+        wait.until(ExpectedConditions.elementToBeClickable(goodAnswerBtn)).click();
     }
 }
