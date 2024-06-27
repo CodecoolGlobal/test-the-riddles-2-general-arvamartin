@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import static org.junit.Assert.assertEquals;
+
 public class GamePageTest {
 
     WebDriver driver;
@@ -46,11 +48,19 @@ public class GamePageTest {
 
     @Test
     void testGamePage() throws InterruptedException {
-            myQuizzesPage1.clickOnMyQuizzesBtn();
-            myQuizzesPage1.createLobby();
-            myQuizzesPage2.joinGameLobby();
-            myQuizzesPage2.joinGame();
-            myQuizzesPage1.startGame();
+
+
+        myQuizzesPage1.clickOnMyQuizzesBtn();
+        myQuizzesPage1.createLobby();
+        myQuizzesPage2.joinGameLobby("test5");
+        myQuizzesPage2.joinGame();
+        myQuizzesPage1.startGame();
+        myQuizzesPage2.chooseGoodAnswer();
+        myQuizzesPage1.checkTheResults();
+
+        WebElement scoreBoard = wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div[1]/div")));
+
+        assertEquals("SCOREBOARD", scoreBoard.getText());
 
     }
 

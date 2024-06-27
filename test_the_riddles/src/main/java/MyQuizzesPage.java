@@ -4,6 +4,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
+import java.util.List;
+import java.util.Objects;
 
 public class MyQuizzesPage {
 
@@ -30,10 +32,14 @@ public class MyQuizzesPage {
     By questionBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/div/button");
     By questionInput = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[1]/input");
     By saveEditedQuestionBtn = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[4]/button[1]");
-    By gameBtn = By.xpath("//*[@id=\"root\"]/div/div[1]/nav/div/div[1]/ul/li[1]/a/span");
     By joinGameLobbyBtn = By.xpath("//*[@id=\"root\"]/div/div[2]/div/div[1]/div/button");
     By joinGameBtn = By.xpath("//*[@id=\"root\"]/div/div/div[2]/button");
-    By goodAnswerBtn = By.xpath("//*[@id=\"1\"]/p");
+    By goodAnswerBtn = By.xpath("/html/body/div/div/div[2]/div[1]/button");
+    By resultBtn = By.xpath("/html/body/div/button");
+    By lobbyName = By.xpath("/html/body/div/div/div[2]/div/div[1]/div[7]/span[1]");
+    By lobbyContainer = By.xpath("//div[@class='grow pt-16']/div");
+    By gameBtn2 = By.xpath("//*[@id=\"root\"]/div/div[1]/nav/div/div[1]/ul/li[1]/a/span");
+
 
 
 
@@ -116,21 +122,44 @@ public class MyQuizzesPage {
         wait.until(ExpectedConditions.elementToBeClickable(timer)).sendKeys(time);
     }
 
-    public void joinGameLobby() throws InterruptedException {
+    public void joinGameLobby(String lobbyTitle) throws InterruptedException {
+
         Thread.sleep(1000);
-        wait.until(ExpectedConditions.elementToBeClickable(gameBtn)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(joinGameLobbyBtn)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(gameBtn2)).click();
+
+        List<WebElement> lobbyContainers = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(lobbyContainer));
+
+        for (WebElement lobbyContainer : lobbyContainers) {
+            WebElement lobbyNameElement = lobbyContainer.findElement(By.xpath(".//span[@class='grow flex align-middle text-lg pl-2 items-center']"));
+            if (Objects.equals(lobbyNameElement.getText(), lobbyTitle)) {
+                WebElement joinButton = lobbyContainer.findElement(By.xpath(".//button[contains(text(), 'Join')]"));
+                joinButton.click();
+                return;
+            }
+        }
+
+        System.out.println("Cannot find the proper lobby");
     }
 
     public void  startGame() {
-        wait.until(ExpectedConditions.elementToBeClickable(startBtn)).click();
+      try {
+          wait.until(ExpectedConditions.elementToBeClickable(startBtn)).click();
+      } catch (Exception e) {
+          System.out.println("there's no start button");
+      }
     }
 
-    public void joinGame() {
+    public void joinGame() throws InterruptedException {
+        Thread.sleep(1000);
         wait.until(ExpectedConditions.elementToBeClickable(joinGameBtn)).click();
     }
 
     public void chooseGoodAnswer() {
         wait.until(ExpectedConditions.elementToBeClickable(goodAnswerBtn)).click();
+    }
+
+    public void checkTheResults() throws InterruptedException {
+        Thread.sleep(3000);
+        wait.until(ExpectedConditions.elementToBeClickable(resultBtn)).click();
     }
 }
