@@ -10,8 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class QuestionTimerTest {
     WebDriver driver;
@@ -35,7 +34,7 @@ public class QuestionTimerTest {
         driver.quit();
     }
 
-    @Test
+   @Test
     void userCanSetTime() throws InterruptedException {
         String expected = "15";
         WebElement loginBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a[1]/button/span")));
@@ -63,5 +62,21 @@ public class QuestionTimerTest {
         myQuizzesPage.setTimer(time);
         String actual = driver.findElement(By.xpath("//*[@id=\"-1time\"]")).getAttribute("value");
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void onlyNumbersCanBeAcceptedAsTime() throws InterruptedException {
+        String letter = "m";
+        WebElement loginBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a[1]/button/span")));
+
+        loginBtn.click();
+        loginPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
+        myQuizzesPage.clickOnMyQuizzesBtn();
+        myQuizzesPage.clickOnAddQuizBtn();
+        myQuizzesPage.clickOnAddQuestionBtn();
+        myQuizzesPage.setTimer(letter);
+
+        String actual = driver.findElement(By.xpath("//*[@id=\"-1time\"]")).getAttribute("value");
+        assertNotEquals(letter, actual);
     }
 }

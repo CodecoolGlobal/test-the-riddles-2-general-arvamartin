@@ -47,8 +47,7 @@ public class GamePageTest {
     }
 
     @Test
-    void testGamePage() throws InterruptedException {
-
+    void testPlayingGame() throws InterruptedException {
 
         myQuizzesPage1.clickOnMyQuizzesBtn();
         myQuizzesPage1.createLobby();

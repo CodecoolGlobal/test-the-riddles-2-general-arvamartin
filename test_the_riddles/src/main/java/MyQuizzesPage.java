@@ -3,6 +3,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
 import java.util.List;
 import java.util.Objects;
@@ -38,9 +39,7 @@ public class MyQuizzesPage {
     By resultBtn = By.xpath("/html/body/div/button");
     By lobbyName = By.xpath("/html/body/div/div/div[2]/div/div[1]/div[7]/span[1]");
     By lobbyContainer = By.xpath("//div[@class='grow pt-16']/div");
-    By gameBtn2 = By.xpath("//*[@id=\"root\"]/div/div[1]/nav/div/div[1]/ul/li[1]/a/span");
-
-
+    By gameBtn = By.xpath("//*[@id=\"root\"]/div/div[1]/nav/div/div[1]/ul/li[1]/a/span");
 
 
     public MyQuizzesPage(WebDriver driver) {
@@ -65,7 +64,7 @@ public class MyQuizzesPage {
 
     }
 
-    public void fillAndSaveTheQuestionModal (String questionTitle, String answerOne, String answerTwo){
+    public void fillAndSaveTheQuestionModal(String questionTitle, String answerOne, String answerTwo) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(questionTitleInput)).sendKeys(questionTitle);
         wait.until(ExpectedConditions.visibilityOfElementLocated(answerInputOne)).sendKeys(answerOne);
         wait.until(ExpectedConditions.visibilityOfElementLocated(getAnswerInputTwo)).sendKeys(answerTwo);
@@ -73,11 +72,11 @@ public class MyQuizzesPage {
     }
 
 
-    public void deleteQuiz(){
+    public void deleteQuiz() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(deleteBtn)).click();
     }
 
-    public void modifyQuizTitle(String newTitle){
+    public void modifyQuizTitle(String newTitle) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(editBtn)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(quizTitleInput)).sendKeys(newTitle);
         wait.until(ExpectedConditions.elementToBeClickable(saveNewQuizTitle)).click();
@@ -91,21 +90,21 @@ public class MyQuizzesPage {
     }
 
 
-    public void createLobby(){
+    public void createLobby() {
         clickOnPlayBtn();
         clickOnCreateGameLobbyBtn();
     }
 
-    public void clickOnPlayBtn(){
+    public void clickOnPlayBtn() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(playBtn)).click();
     }
 
-    public void clickOnCreateGameLobbyBtn(){
+    public void clickOnCreateGameLobbyBtn() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(createGameLobbyBtn)).click();
     }
 
-    public String startBtnText(){
-       return wait.until(ExpectedConditions.visibilityOfElementLocated(startBtn)).getText();
+    public String startBtnText() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(startBtn)).getText();
     }
 
 
@@ -123,30 +122,29 @@ public class MyQuizzesPage {
     }
 
     public void joinGameLobby(String lobbyTitle) throws InterruptedException {
-
         Thread.sleep(1000);
-        wait.until(ExpectedConditions.elementToBeClickable(gameBtn2)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(gameBtn)).click();
 
         List<WebElement> lobbyContainers = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(lobbyContainer));
 
         for (WebElement lobbyContainer : lobbyContainers) {
             WebElement lobbyNameElement = lobbyContainer.findElement(By.xpath(".//span[@class='grow flex align-middle text-lg pl-2 items-center']"));
+
             if (Objects.equals(lobbyNameElement.getText(), lobbyTitle)) {
                 WebElement joinButton = lobbyContainer.findElement(By.xpath(".//button[contains(text(), 'Join')]"));
                 joinButton.click();
                 return;
             }
         }
-
         System.out.println("Cannot find the proper lobby");
     }
 
-    public void  startGame() {
-      try {
-          wait.until(ExpectedConditions.elementToBeClickable(startBtn)).click();
-      } catch (Exception e) {
-          System.out.println("there's no start button");
-      }
+    public void startGame() {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(startBtn)).click();
+        } catch (Exception e) {
+            System.out.println("there's no start button");
+        }
     }
 
     public void joinGame() throws InterruptedException {
