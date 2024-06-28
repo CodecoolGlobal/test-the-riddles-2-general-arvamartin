@@ -11,10 +11,12 @@ public class LoginPage {
     private WebDriver driver;
     private WebDriverWait wait;
 
-    By usernameInput = By.id("user-name");
-    By passwordInput = By.id("password");
-    By loginBtn = By.xpath("/html/body/div/div/div[2]/div/div/div[2]/button");
-    By logoutBtn = By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a/button/span");
+    private By usernameInput = By.id("user-name");
+    private By passwordInput = By.id("password");
+    private By loginBtn = By.xpath("/html/body/div/div/div[2]/div/div/div[2]/button");
+    private By logoutBtn = By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a/button/span");
+
+    private static final String BASE_URL = "http://localhost:3000";
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -22,6 +24,7 @@ public class LoginPage {
     }
 
     public void login(String username, String password) throws InterruptedException {
+        driver.get(BASE_URL);
         fillTheUsername(username);
         fillThePassword(password);
         clickOnLoginBtn();

@@ -29,9 +29,9 @@ class RegistrationPageAndLoginPageTest {
 
     @Test
     public void userCanRegistrateAndLoginWithTheChosenCredentials() throws InterruptedException {
-        assertTrue(registrationPage.clickToSignUp());
+        assertTrue(registrationPage.clickToSignUp());  // let the test fail with NoSuchElementException or similar
 
-        String username = registrationPage.fillTheUserName(System.getenv("USER_NAME"));
+        String username = registrationPage.fillTheUserName(System.getenv("USER_NAME"));  // test data should not come from the environment
         registrationPage.fillTheUserEmail(System.getenv("EMAIL"));
         String password = registrationPage.fillTheUserPassword(System.getenv("PASSWORD"));
         assertTrue(registrationPage.clickToRegistrate());
@@ -48,7 +48,7 @@ class RegistrationPageAndLoginPageTest {
         String password = registrationPage.fillTheUserPassword(System.getenv("PASSWORD"));
         assertTrue(registrationPage.clickToRegistrate());
         loginPage.login(username, password);
-        assertNotEquals("Logout", loginPage.findLogoutBtn().getText());
+        assertNotEquals("Logout", loginPage.findLogoutBtn().getText());  // test should be able to run with proper functionality
     }
 
     @AfterEach

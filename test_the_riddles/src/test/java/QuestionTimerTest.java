@@ -13,10 +13,12 @@ import java.time.Duration;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class QuestionTimerTest {
-    WebDriver driver;
-    MyQuizzesPage myQuizzesPage;
-    LoginPage loginPage;
-    WebDriverWait wait;
+    private WebDriver driver;
+    private MyQuizzesPage myQuizzesPage;
+    private LoginPage loginPage;
+    private WebDriverWait wait;
+
+    private static final String timerFieldXpath = "//*[@id=\"-1time\"]";
 
 
     @BeforeEach
@@ -44,7 +46,7 @@ public class QuestionTimerTest {
         myQuizzesPage.clickOnAddQuizBtn();
         myQuizzesPage.clickOnAddQuestionBtn();
         myQuizzesPage.setTimer(expected);
-        String actual = driver.findElement(By.xpath("//*[@id=\"-1time\"]")).getAttribute("value");
+        String actual = driver.findElement(By.xpath(timerFieldXpath)).getAttribute("value");
         assertEquals(expected, actual);
     }
 
@@ -60,7 +62,7 @@ public class QuestionTimerTest {
         myQuizzesPage.clickOnAddQuizBtn();
         myQuizzesPage.clickOnAddQuestionBtn();
         myQuizzesPage.setTimer(time);
-        String actual = driver.findElement(By.xpath("//*[@id=\"-1time\"]")).getAttribute("value");
+        String actual = driver.findElement(By.xpath(timerFieldXpath)).getAttribute("value");
         assertEquals(expected, actual);
     }
 
@@ -76,7 +78,7 @@ public class QuestionTimerTest {
         myQuizzesPage.clickOnAddQuestionBtn();
         myQuizzesPage.setTimer(letter);
 
-        String actual = driver.findElement(By.xpath("//*[@id=\"-1time\"]")).getAttribute("value");
+        String actual = driver.findElement(By.xpath(timerFieldXpath)).getAttribute("value");
         assertNotEquals(letter, actual);
     }
 }
