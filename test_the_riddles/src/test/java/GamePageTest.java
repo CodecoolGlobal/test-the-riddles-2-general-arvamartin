@@ -51,7 +51,7 @@ public class GamePageTest {
 
         myQuizzesPage1.clickOnMyQuizzesBtn();
         myQuizzesPage1.createLobby();
-        myQuizzesPage2.joinGameLobby("test5");
+        myQuizzesPage2.joinGameLobby("finaldemo");
         myQuizzesPage2.joinGame();
         myQuizzesPage1.startGame();
         myQuizzesPage2.chooseGoodAnswer();

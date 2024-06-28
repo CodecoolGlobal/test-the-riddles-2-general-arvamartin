@@ -143,7 +143,7 @@ public class MyQuizzesPage {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(startBtn)).click();
         } catch (Exception e) {
-            System.out.println("there's no start button");
+            System.out.println("Cannot start");
         }
     }
 
