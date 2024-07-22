@@ -13,23 +13,23 @@ import static org.junit.Assert.assertEquals;
 
 public class GamePageTest {
 
-    WebDriver driver;
-    WebDriver driver2;
-    WebDriverWait wait1;
-    WebDriverWait wait2;
-    LoginPage loginPage1;
-    LoginPage loginPage2;
-    MyQuizzesPage myQuizzesPage1;
-    MyQuizzesPage myQuizzesPage2;
+   private WebDriver driver;
+   private WebDriver driver2;
+   private WebDriverWait wait1;
+   private WebDriverWait wait2;
+   private LoginPage loginPage1;
+   private LoginPage loginPage2;
+   private MyQuizzesPage myQuizzesPage1;
+   private MyQuizzesPage myQuizzesPage2;
 
     @BeforeEach
     public void setUp() throws InterruptedException {
         driver = new EdgeDriver();
         driver2 = new EdgeDriver();
-        driver.get("http://localhost:3000");
-        driver2.get("http://localhost:3000");
         loginPage1 = new LoginPage(driver);
+        loginPage1.openTheApp();
         loginPage2 = new LoginPage(driver2);
+        loginPage2.openTheApp();
         myQuizzesPage1 = new MyQuizzesPage(driver);
         myQuizzesPage2 = new MyQuizzesPage(driver2);
         driver.manage().window().maximize();

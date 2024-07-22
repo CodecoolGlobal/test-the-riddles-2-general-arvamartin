@@ -20,16 +20,16 @@ class RegistrationPageAndLoginPageTest {
     @BeforeEach
     public void setUp() {
         driver = new EdgeDriver();
-        driver.get("http://localhost:3000");
         registrationPage = new RegistrationPage(driver);
         loginPage = new LoginPage(driver);
+        loginPage.openTheApp();
         driver.manage().window().maximize();
 
     }
 
     @Test
     public void userCanRegistrateAndLoginWithTheChosenCredentials() throws InterruptedException {
-        assertTrue(registrationPage.clickToSignUp());
+        registrationPage.clickToSignUp();
 
         String username = registrationPage.fillTheUserName(System.getenv("USER_NAME"));
         registrationPage.fillTheUserEmail(System.getenv("EMAIL"));
@@ -41,7 +41,7 @@ class RegistrationPageAndLoginPageTest {
 
     @Test
     public void userCanRegistrateOnlyWithProperEmailAddress() throws InterruptedException {
-        assertTrue(registrationPage.clickToSignUp());
+        registrationPage.clickToSignUp();
 
         String username = registrationPage.fillTheUserName(System.getenv("USER_NAME"));
         registrationPage.fillTheUserEmail("test");

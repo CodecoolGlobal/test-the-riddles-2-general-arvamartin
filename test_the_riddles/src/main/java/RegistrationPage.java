@@ -8,14 +8,14 @@ import java.time.Duration;
 
 public class RegistrationPage {
 
-    WebDriver driver;
-    WebDriverWait wait;
+    private final WebDriver driver;
+    private final WebDriverWait wait;
 
-    By signUpBtn = By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a[2]/button/span");
-    By userNameInput = By.xpath("/html/body/div/div/div[2]/div/div/div[2]/div[1]/input");
-    By emailInput = By.xpath("/html/body/div/div/div[2]/div/div/div[2]/div[2]/input");
-    By passWordInput = By.xpath("/html/body/div/div/div[2]/div/div/div[2]/div[3]/input");
-    By registrationBtn = By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[2]/button");
+    private final By signUpBtn = By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a[2]/button/span");
+    private final By userNameInput = By.xpath("/html/body/div/div/div[2]/div/div/div[2]/div[1]/input");
+    private final By emailInput = By.xpath("/html/body/div/div/div[2]/div/div/div[2]/div[2]/input");
+    private final By passWordInput = By.xpath("/html/body/div/div/div[2]/div/div/div[2]/div[3]/input");
+    private final By registrationBtn = By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[2]/button");
 
     public RegistrationPage(WebDriver driver) {
         this.driver = driver;
@@ -23,14 +23,9 @@ public class RegistrationPage {
     }
 
 
-    public boolean clickToSignUp(){
-        try {
+    public void clickToSignUp() {
             WebElement btn = wait.until(ExpectedConditions.visibilityOfElementLocated(signUpBtn));
             btn.click();
-            return true;
-        }catch (Exception e){
-            return false;
-        }
     }
 
     public String fillTheUserName(String userName) {
@@ -39,23 +34,23 @@ public class RegistrationPage {
         return userName;
     }
 
-    public String fillTheUserEmail(String email) {
+    public void fillTheUserEmail(String email) {
         WebElement btn = wait.until(ExpectedConditions.visibilityOfElementLocated(emailInput));
         btn.sendKeys(email);
-        return email;
     }
+
     public String fillTheUserPassword(String password) {
         WebElement btn = wait.until(ExpectedConditions.visibilityOfElementLocated(passWordInput));
         btn.sendKeys(password);
         return password;
     }
 
-    public boolean clickToRegistrate(){
+    public boolean clickToRegistrate() {
         try {
             WebElement btn = wait.until(ExpectedConditions.visibilityOfElementLocated(registrationBtn));
             btn.click();
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }

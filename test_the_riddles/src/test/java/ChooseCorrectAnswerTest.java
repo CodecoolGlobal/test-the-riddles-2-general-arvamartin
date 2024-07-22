@@ -14,17 +14,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ChooseCorrectAnswerTest {
 
-    WebDriver driver;
-    MyQuizzesPage myQuizzesPage;
-    LoginPage loginPage;
-    WebDriverWait wait;
+    private WebDriver driver;
+    private MyQuizzesPage myQuizzesPage;
+    private LoginPage loginPage;
+    private WebDriverWait wait;
 
 
     @BeforeEach
     public void setUp() {
         driver = new EdgeDriver();
-        driver.get("http://localhost:3000");
         loginPage = new LoginPage(driver);
+        loginPage.openTheApp();
         myQuizzesPage = new MyQuizzesPage(driver);
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(3));
@@ -44,7 +44,7 @@ public class ChooseCorrectAnswerTest {
         myQuizzesPage.clickOnAddQuizBtn();
         myQuizzesPage.clickOnAddQuestionBtn();
         myQuizzesPage.chooseCheckBoxOne();
-        Boolean actual =  driver.findElement(By.xpath("//*[@id=\"checkbox-1\"]")).isSelected();
+        Boolean actual = driver.findElement(By.xpath("//*[@id=\"checkbox-1\"]")).isSelected();
         assertTrue(actual);
     }
 
@@ -58,8 +58,8 @@ public class ChooseCorrectAnswerTest {
         myQuizzesPage.clickOnAddQuestionBtn();
         myQuizzesPage.chooseCheckBoxOne();
         myQuizzesPage.chooseCheckBoxTwo();
-        Boolean actual1 =  driver.findElement(By.xpath("//*[@id=\"checkbox-1\"]")).isSelected();
-        Boolean actual2 =  driver.findElement(By.xpath("//*[@id=\"checkbox-2\"]")).isSelected();
+        Boolean actual1 = driver.findElement(By.xpath("//*[@id=\"checkbox-1\"]")).isSelected();
+        Boolean actual2 = driver.findElement(By.xpath("//*[@id=\"checkbox-2\"]")).isSelected();
         assertTrue(actual1 && actual2);
     }
 }

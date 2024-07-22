@@ -25,7 +25,7 @@ class StayLoggedInTest {
         webDriver = new EdgeDriver();
         wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
         loginPage = new LoginPage(webDriver);
-        webDriver.get("http://localhost:3000/");
+        loginPage.openTheApp();
         webDriver.manage().window().maximize();
         WebElement loginBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a[1]/button/span")));
         loginBtn.click();

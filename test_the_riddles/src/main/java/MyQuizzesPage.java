@@ -10,36 +10,34 @@ import java.util.Objects;
 
 public class MyQuizzesPage {
 
-    WebDriver driver;
-    WebDriverWait wait;
+    private final WebDriver driver;
+    private final WebDriverWait wait;
 
-    By myQuizzesBtn = By.xpath("//*[@id=\"root\"]/div/div[1]/nav/div/div[1]/ul/li[3]/a/span");
-    By addQuizBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/button");
-    By addQuestionBtn = By.xpath("//*[@id=\"root\"]/div/div[2]/div/div[1]/button");
-    By questionTitleInput = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[1]/input");
-    By answerInputOne = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[3]/div[2]/div/div[1]/input");
-    By getAnswerInputTwo = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[3]/div[3]/div/div[1]/input");
-    By saveBtn = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[4]/button[1]");
-    By deleteBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/div[1]/button[1]");
-    By playBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/div/button[3]");
-    By createGameLobbyBtn = By.xpath("/html/body/div/div/button");
-    By startBtn = By.xpath("/html/body/div/div/div/div[2]/button");
-    By checkBoxOne = By.xpath("//*[@id=\"checkbox-1\"]");
-    By checkBoxTwo = By.xpath("//*[@id=\"checkbox-2\"]");
-    By timer = By.xpath("//*[@id=\"-1time\"]");
-    By editBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/div/button[2]");
-    By quizTitleInput = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[1]/input");
-    By saveNewQuizTitle = By.xpath("/html/body/div/div/div[2]/div/div[2]/button[1]");
-    By questionBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/div/button");
-    By questionInput = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[1]/input");
-    By saveEditedQuestionBtn = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[4]/button[1]");
-    By joinGameLobbyBtn = By.xpath("//*[@id=\"root\"]/div/div[2]/div/div[1]/div/button");
-    By joinGameBtn = By.xpath("//*[@id=\"root\"]/div/div/div[2]/button");
-    By goodAnswerBtn = By.xpath("/html/body/div/div/div[2]/div[1]/button");
-    By resultBtn = By.xpath("/html/body/div/button");
-    By lobbyName = By.xpath("/html/body/div/div/div[2]/div/div[1]/div[7]/span[1]");
-    By lobbyContainer = By.xpath("//div[@class='grow pt-16']/div");
-    By gameBtn = By.xpath("//*[@id=\"root\"]/div/div[1]/nav/div/div[1]/ul/li[1]/a/span");
+    private final By myQuizzesBtn = By.xpath("//*[@id=\"root\"]/div/div[1]/nav/div/div[1]/ul/li[3]/a/span");
+    private final By addQuizBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/button");
+    private final By addQuestionBtn = By.xpath("//*[@id=\"root\"]/div/div[2]/div/div[1]/button");
+    private final By questionTitleInput = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[1]/input");
+    private final By answerInputOne = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[3]/div[2]/div/div[1]/input");
+    private final By getAnswerInputTwo = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[3]/div[3]/div/div[1]/input");
+    private final By saveBtn = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[4]/button[1]");
+    private final By deleteBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/div[1]/button[1]");
+    private final By playBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/div/button[3]");
+    private final By createGameLobbyBtn = By.xpath("/html/body/div/div/button");
+    private final By startBtn = By.xpath("/html/body/div/div/div/div[2]/button");
+    private final By checkBoxOne = By.xpath("//*[@id=\"checkbox-1\"]");
+    private final By checkBoxTwo = By.xpath("//*[@id=\"checkbox-2\"]");
+    private final By timer = By.xpath("//*[@id=\"-1time\"]");
+    private final By editBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/div/button[2]");
+    private final By quizTitleInput = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[1]/input");
+    private final By saveNewQuizTitle = By.xpath("/html/body/div/div/div[2]/div/div[2]/button[1]");
+    private final By questionBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/div/button");
+    private final By questionInput = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[1]/input");
+    private final By saveEditedQuestionBtn = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[4]/button[1]");
+    private final By joinGameBtn = By.xpath("//*[@id=\"root\"]/div/div/div[2]/button");
+    private final By goodAnswerBtn = By.xpath("/html/body/div/div/div[2]/div[1]/button");
+    private final By resultBtn = By.xpath("/html/body/div/button");
+    private final By lobbyContainer = By.xpath("//div[@class='grow pt-16']/div");
+    private final By gameBtn = By.xpath("//*[@id=\"root\"]/div/div[1]/nav/div/div[1]/ul/li[1]/a/span");
 
 
     public MyQuizzesPage(WebDriver driver) {
@@ -82,7 +80,7 @@ public class MyQuizzesPage {
         wait.until(ExpectedConditions.elementToBeClickable(saveNewQuizTitle)).click();
     }
 
-    public void modifyQuestion(String newQuestion) throws InterruptedException {
+    public void modifyQuestion(String newQuestion)  {
         wait.until(ExpectedConditions.visibilityOfElementLocated(editBtn)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(questionBtn)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(questionInput)).sendKeys(newQuestion);

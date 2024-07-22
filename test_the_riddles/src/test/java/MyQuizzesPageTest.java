@@ -8,23 +8,24 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class MyQuizzesPageTest {
 
-    WebDriver driver;
-    MyQuizzesPage myQuizzesPage;
-    LoginPage loginPage;
-    WebDriverWait wait;
+    private WebDriver driver;
+    private MyQuizzesPage myQuizzesPage;
+    private LoginPage loginPage;
+    private WebDriverWait wait;
 
 
     @BeforeEach
     public void setUp() throws InterruptedException {
         driver = new EdgeDriver();
-        driver.get("http://localhost:3000");
         loginPage = new LoginPage(driver);
+        loginPage.openTheApp();
         myQuizzesPage = new MyQuizzesPage(driver);
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(3));

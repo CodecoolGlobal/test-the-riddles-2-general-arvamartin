@@ -8,17 +8,22 @@ import java.time.Duration;
 
 public class LoginPage {
 
-    private WebDriver driver;
-    private WebDriverWait wait;
+    private final WebDriver driver;
+    private final WebDriverWait wait;
 
-    By usernameInput = By.id("user-name");
-    By passwordInput = By.id("password");
-    By loginBtn = By.xpath("/html/body/div/div/div[2]/div/div/div[2]/button");
-    By logoutBtn = By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a/button/span");
+    private final By usernameInput = By.id("user-name");
+    private final By passwordInput = By.id("password");
+    private final By loginBtn = By.xpath("/html/body/div/div/div[2]/div/div/div[2]/button");
+    private final By logoutBtn = By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a/button/span");
+    private final String BASE_URL = "http://localhost:3000";
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
+
+    public void openTheApp(){
+        driver.get(BASE_URL);
     }
 
     public void login(String username, String password) throws InterruptedException {
@@ -43,7 +48,7 @@ public class LoginPage {
         btn.click();
     }
 
-    public WebElement findLogoutBtn(){
+    public WebElement findLogoutBtn() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(logoutBtn));
     }
 

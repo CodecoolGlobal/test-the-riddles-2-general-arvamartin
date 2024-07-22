@@ -22,8 +22,8 @@ public class QuestionTimerTest {
     @BeforeEach
     public void setUp() {
         driver = new EdgeDriver();
-        driver.get("http://localhost:3000");
         loginPage = new LoginPage(driver);
+        loginPage.openTheApp();
         myQuizzesPage = new MyQuizzesPage(driver);
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(3));
