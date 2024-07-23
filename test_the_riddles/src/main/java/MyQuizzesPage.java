@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -38,6 +39,18 @@ public class MyQuizzesPage {
     public MyQuizzesPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
+
+    public boolean testResponsiveLayout(Dimension dimension) {
+        driver.manage().window().setSize(dimension);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("body")));
+
+        boolean isTaskBoxCollapsed = driver.findElement(By.xpath("/html/body/div/div/div[2]/div/div[1]")).isDisplayed();
+        if (!isTaskBoxCollapsed) {
+            System.err.println("Game list is not collapsed!");
+            return false;
+        }
+        return true;
     }
 
     public void clickOnMyQuizzesBtn() throws InterruptedException {

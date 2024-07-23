@@ -65,3 +65,43 @@ they can join in.
 ![alt text](image-1.png)
 
 ## Test Details
+### StayLoggedInTest
+* Purpose: Checks if the user stays logged in after a page refresh or opening a new tab.
+* Tests:
+    - testRefreshThePageAndStayedLoggedIn: Logs in, refreshes the page, verifies the presence of the 
+    logout button.
+    - testOpenNewTabAndStayedLoggedIn: Logs in, opens a new tab, verifies the presence of the logout 
+    button.
+### ResponsiveUITest
+* Purpose: Checks UI responsiveness across different screen sizes.
+* Tests:
+    - testResponsiveUI: Tests UI on desktop, tablet, and mobile dimensions.
+### RegistrationPageAndLoginPageTest
+* Purpose: Tests user registration and login functionalities.
+* Tests:
+    - userCanRegisterAndLoginWithChosenCredentials: Registers and logs in a user.
+    - userCanRegisterOnlyWithProperEmailAddress: Tests registration with an invalid email.
+    - createQuizWithValidInputFields: Parameterized test for registration using CSV data.
+### QuestionTimerTest
+* Purpose: Tests setting timers for questions.
+* Tests:
+    - userCanSetTime: Verifies setting a positive timer value.
+    - userCannotSetNegativeTime: Ensures negative timer values aren't accepted.
+    - onlyNumbersCanBeAcceptedAsTime: Tests that only numeric values are accepted for timers.
+### MyQuizzesPageTest
+* Purpose: Tests quiz management functionalities.
+* Tests:
+    - userCanCreateQuizzes: Verifies quiz creation.
+    - userCanDeleteQuizzes: Tests quiz deletion.
+    - userCanModifyTitleOfExistingQuizzes: Checks modification of quiz titles.
+    - userCanModifyTitleOfExistingQuestions: Tests modification of question titles.
+    - userCanCreateGameLobby: Verifies game lobby creation.
+### GamePageTest
+* Purpose: Tests playing games and displaying scoreboards.
+* Tests:
+    - testPlayingGame: Verifies joining a lobby, starting a game, and checking the scoreboard.
+### ChooseCorrectAnswerTest
+* Purpose: Tests selecting correct answers in quizzes.
+* Tests:
+    - userCanChooseCorrectAnswer: Verifies selecting a single correct answer.
+    - userCanChooseMultipleCorrectAnswers: Checks selecting multiple correct answers.
