@@ -14,14 +14,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GamePageTest {
 
-   private WebDriver driver;
-   private WebDriver driver2;
-   private WebDriverWait wait1;
-   private WebDriverWait wait2;
-   private LoginPage loginPage1;
-   private LoginPage loginPage2;
-   private MyQuizzesPage myQuizzesPage1;
-   private MyQuizzesPage myQuizzesPage2;
+    private WebDriver driver;
+    private WebDriver driver2;
+    private WebDriverWait wait1;
+    private WebDriverWait wait2;
+    private LoginPage loginPage1;
+    private LoginPage loginPage2;
+    private MyQuizzesPage myQuizzesPage;
+    private GamesPage gamesPage;
 
     @BeforeEach
     public void setUp() throws InterruptedException {
@@ -31,8 +31,8 @@ public class GamePageTest {
         loginPage1.openTheApp();
         loginPage2 = new LoginPage(driver2);
         loginPage2.openTheApp();
-        myQuizzesPage1 = new MyQuizzesPage(driver);
-        myQuizzesPage2 = new MyQuizzesPage(driver2);
+        myQuizzesPage = new MyQuizzesPage(driver);
+        gamesPage = new GamesPage(driver2);
         driver.manage().window().maximize();
         driver2.manage().window().maximize();
         wait1 = new WebDriverWait(driver, Duration.ofSeconds(3));
@@ -50,18 +50,17 @@ public class GamePageTest {
     @Test
     void testPlayingGame() throws InterruptedException {
 
-        myQuizzesPage1.clickOnMyQuizzesBtn();
-        myQuizzesPage1.createLobby();
-        myQuizzesPage2.joinGameLobby("finaldemo");
-        myQuizzesPage2.joinGame();
-        myQuizzesPage1.startGame();
-        myQuizzesPage2.chooseGoodAnswer();
-        myQuizzesPage1.checkTheResults();
+        myQuizzesPage.clickOnMyQuizzesBtn();
+        myQuizzesPage.createLobby();
+        gamesPage.navigateToGamesPage();
+        gamesPage.joinGameLobby("test1");
+        gamesPage.joinGame();
+        myQuizzesPage.startGame();
+        gamesPage.chooseFirstAnswer();
+        myQuizzesPage.checkTheResults();
 
         WebElement scoreBoard = wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div[1]/div")));
-
         assertEquals("SCOREBOARD", scoreBoard.getText());
 
     }
-
 }

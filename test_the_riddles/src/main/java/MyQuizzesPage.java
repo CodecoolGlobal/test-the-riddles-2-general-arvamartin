@@ -33,18 +33,12 @@ public class MyQuizzesPage {
     private final By questionBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/div/button");
     private final By questionInput = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[1]/input");
     private final By saveEditedQuestionBtn = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[4]/button[1]");
-    private final By joinGameBtn = By.xpath("//*[@id=\"root\"]/div/div/div[2]/button");
-    private final By goodAnswerBtn = By.xpath("/html/body/div/div/div[2]/div[1]/button");
     private final By resultBtn = By.xpath("/html/body/div/button");
-    private final By lobbyContainer = By.xpath("//div[@class='grow pt-16']/div");
-    private final By gameBtn = By.xpath("//*[@id=\"root\"]/div/div[1]/nav/div/div[1]/ul/li[1]/a/span");
-
 
     public MyQuizzesPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
-
 
     public void clickOnMyQuizzesBtn() throws InterruptedException {
         Thread.sleep(2000);
@@ -59,7 +53,6 @@ public class MyQuizzesPage {
     public void clickOnAddQuestionBtn() throws InterruptedException {
         Thread.sleep(2000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(addQuestionBtn)).click();
-
     }
 
     public void fillAndSaveTheQuestionModal(String questionTitle, String answerOne, String answerTwo) {
@@ -68,7 +61,6 @@ public class MyQuizzesPage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(getAnswerInputTwo)).sendKeys(answerTwo);
         wait.until(ExpectedConditions.visibilityOfElementLocated(saveBtn)).click();
     }
-
 
     public void deleteQuiz() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(deleteBtn)).click();
@@ -80,13 +72,12 @@ public class MyQuizzesPage {
         wait.until(ExpectedConditions.elementToBeClickable(saveNewQuizTitle)).click();
     }
 
-    public void modifyQuestion(String newQuestion)  {
+    public void modifyQuestion(String newQuestion) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(editBtn)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(questionBtn)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(questionInput)).sendKeys(newQuestion);
         wait.until(ExpectedConditions.elementToBeClickable(saveEditedQuestionBtn)).click();
     }
-
 
     public void createLobby() {
         clickOnPlayBtn();
@@ -105,7 +96,6 @@ public class MyQuizzesPage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(startBtn)).getText();
     }
 
-
     public void chooseCheckBoxOne() {
         wait.until(ExpectedConditions.elementToBeClickable(checkBoxOne)).click();
     }
@@ -119,39 +109,12 @@ public class MyQuizzesPage {
         wait.until(ExpectedConditions.elementToBeClickable(timer)).sendKeys(time);
     }
 
-    public void joinGameLobby(String lobbyTitle) throws InterruptedException {
-        Thread.sleep(1000);
-        wait.until(ExpectedConditions.elementToBeClickable(gameBtn)).click();
-
-        List<WebElement> lobbyContainers = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(lobbyContainer));
-
-        for (WebElement lobbyContainer : lobbyContainers) {
-            WebElement lobbyNameElement = lobbyContainer.findElement(By.xpath(".//span[@class='grow flex align-middle text-lg pl-2 items-center']"));
-
-            if (Objects.equals(lobbyNameElement.getText(), lobbyTitle)) {
-                WebElement joinButton = lobbyContainer.findElement(By.xpath(".//button[contains(text(), 'Join')]"));
-                joinButton.click();
-                return;
-            }
-        }
-        System.out.println("Cannot find the proper lobby");
-    }
-
     public void startGame() {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(startBtn)).click();
         } catch (Exception e) {
             System.out.println("Cannot start");
         }
-    }
-
-    public void joinGame() throws InterruptedException {
-        Thread.sleep(1000);
-        wait.until(ExpectedConditions.elementToBeClickable(joinGameBtn)).click();
-    }
-
-    public void chooseGoodAnswer() {
-        wait.until(ExpectedConditions.elementToBeClickable(goodAnswerBtn)).click();
     }
 
     public void checkTheResults() throws InterruptedException {
