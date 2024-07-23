@@ -25,7 +25,6 @@ class RegistrationPageAndLoginPageTest {
     private LoginPage loginPage;
 
 
-
     @BeforeEach
     public void setUp() {
         driver = new EdgeDriver();
@@ -33,7 +32,6 @@ class RegistrationPageAndLoginPageTest {
         loginPage = new LoginPage(driver);
         loginPage.openTheApp();
         driver.manage().window().maximize();
-
     }
 
     @Test
@@ -74,8 +72,6 @@ class RegistrationPageAndLoginPageTest {
 
         assertEquals("Logout", loginPage.findLogoutBtn().getText());
     }
-
-
 
 
     @AfterEach
