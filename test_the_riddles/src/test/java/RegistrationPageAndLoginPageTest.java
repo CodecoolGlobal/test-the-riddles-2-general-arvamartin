@@ -1,13 +1,21 @@
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import static com.google.common.base.StandardSystemProperty.USER_NAME;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
+import java.util.stream.Stream;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class RegistrationPageAndLoginPageTest {
@@ -15,6 +23,7 @@ class RegistrationPageAndLoginPageTest {
     private WebDriver driver;
     private RegistrationPage registrationPage;
     private LoginPage loginPage;
+
 
 
     @BeforeEach
@@ -50,6 +59,24 @@ class RegistrationPageAndLoginPageTest {
         loginPage.login(username, password);
         assertNotEquals("Logout", loginPage.findLogoutBtn().getText());
     }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/src/resources/RegistrationData.csv", numLinesToSkip = 1)
+    public void createQuizWithValidInputFields(String inputUsername, String inputEmail, String inputPassword) throws InterruptedException {
+        registrationPage.clickToSignUp();
+
+        String username = registrationPage.fillTheUserName(inputUsername);
+        registrationPage.fillTheUserEmail(inputEmail);
+        String password = registrationPage.fillTheUserPassword(inputPassword);
+        registrationPage.clickToRegistrate();
+
+        loginPage.login(username, password);
+
+        assertEquals("Logout", loginPage.findLogoutBtn().getText());
+    }
+
+
+
 
     @AfterEach
     public void closeTheApp(){
