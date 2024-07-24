@@ -1,6 +1,8 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -11,15 +13,20 @@ public class LoginPage {
     private final WebDriver driver;
     private final WebDriverWait wait;
 
-    private final By usernameInput = By.id("user-name");
-    private final By passwordInput = By.id("password");
-    private final By loginBtn = By.xpath("/html/body/div/div/div[2]/div/div/div[2]/button");
-    private final By logoutBtn = By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a/button/span");
+    @FindBy(id ="user-name" )
+    private WebElement usernameInput;
+    @FindBy(id = "password")
+    private WebElement passwordInput;
+    @FindBy(xpath = "/html/body/div/div/div[2]/div/div/div[2]/button")
+    private WebElement loginBtn;
+    @FindBy(xpath = "/html/body/div/div/div[1]/nav/div/div[2]/a/button/span")
+    private WebElement logoutBtn;
     private final String BASE_URL = "http://localhost:3000";
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        PageFactory.initElements(driver, this);
     }
 
     public void openTheApp(){
@@ -34,22 +41,21 @@ public class LoginPage {
 
     public void fillTheUsername(String username) throws InterruptedException {
         Thread.sleep(3000);
-        WebElement input = wait.until(ExpectedConditions.visibilityOfElementLocated(usernameInput));
-        input.sendKeys(username);
+        wait.until(ExpectedConditions.visibilityOf(usernameInput));
+        usernameInput.sendKeys(username);
     }
 
     public void fillThePassword(String password) {
-        WebElement input = wait.until(ExpectedConditions.visibilityOfElementLocated(passwordInput));
-        input.sendKeys(password);
+        wait.until(ExpectedConditions.visibilityOf(passwordInput));
+        passwordInput.sendKeys(password);
     }
 
     public void clickOnLoginBtn() {
-        WebElement btn = driver.findElement(loginBtn);
-        btn.click();
+        wait.until(ExpectedConditions.elementToBeClickable(loginBtn)).click();
     }
 
     public WebElement findLogoutBtn() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(logoutBtn));
+        return wait.until(ExpectedConditions.visibilityOf(logoutBtn));
     }
 
 
