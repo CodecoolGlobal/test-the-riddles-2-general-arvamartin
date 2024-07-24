@@ -11,10 +11,8 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Objects;
 
-public class MyQuizzesPage {
+public class MyQuizzesPage extends BasePage{
 
-    private final WebDriver driver;
-    private final WebDriverWait wait;
 
     @FindBy(xpath = "//*[@id=\"root\"]/div/div[1]/nav/div/div[1]/ul/li[3]/a/span")
     private WebElement myQuizzesBtn;
@@ -61,10 +59,9 @@ public class MyQuizzesPage {
     @FindBy(xpath = "//*[@id=\"root\"]/div/div[2]/div/div[1]/div/button/text()[1]")
     private WebElement questionNumber;
 
+
     public MyQuizzesPage(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     public boolean testResponsiveLayout(Dimension dimension) {
@@ -80,7 +77,7 @@ public class MyQuizzesPage {
     }
 
     public void clickOnMyQuizzesBtn() throws InterruptedException {
-        Thread.sleep(2000);
+        sleep(2000);
         wait.until(ExpectedConditions.elementToBeClickable(myQuizzesBtn)).click();
     }
 
@@ -89,7 +86,7 @@ public class MyQuizzesPage {
     }
 
     public void clickOnAddQuestionBtn() throws InterruptedException {
-        Thread.sleep(2000);
+        sleep(2000);
         wait.until(ExpectedConditions.visibilityOf(addQuestionBtn)).click();
     }
 
@@ -156,7 +153,7 @@ public class MyQuizzesPage {
     }
 
     public void checkTheResults() throws InterruptedException {
-        Thread.sleep(3000);
+        sleep(3000);
         wait.until(ExpectedConditions.elementToBeClickable(resultBtn)).click();
     }
 

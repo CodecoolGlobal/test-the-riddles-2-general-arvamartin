@@ -10,10 +10,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Objects;
 
-public class GamesPage {
-
-    private final WebDriver driver;
-    private final WebDriverWait wait;
+public class GamesPage extends BasePage{
 
 
     @FindBy(xpath = "/html/body/div/div/div[1]/nav/div/div[1]/ul/li[1]/a/span")
@@ -29,15 +26,12 @@ public class GamesPage {
 
 
     public GamesPage(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
 
     public void joinGameLobby(String lobbyTitle) throws InterruptedException {
-        Thread.sleep(1000);
-
+        sleep(1000);
         wait.until(ExpectedConditions.visibilityOfAllElements(lobbyContainers));
 
         for (WebElement lobbyContainer : lobbyContainers) {

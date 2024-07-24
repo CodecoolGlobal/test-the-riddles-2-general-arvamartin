@@ -32,7 +32,7 @@ class RegistrationPageAndLoginPageTest {
         registrationPage = new RegistrationPage(driver);
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
-        loginPage.openTheApp();
+        homePage.openTheApp();
         driver.manage().window().maximize();
         homePage.navigateToRegistrationPage();
     }

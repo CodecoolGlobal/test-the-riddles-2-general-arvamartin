@@ -13,7 +13,7 @@ import java.time.Duration;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class GamePageTest {
+public class GamePageTest  {
 
     private WebDriver driver;
     private WebDriver driver2;
@@ -26,16 +26,17 @@ public class GamePageTest {
     private MyQuizzesPage myQuizzesPage;
     private GamesPage gamesPage;
 
+
     @BeforeEach
     public void setUp() throws InterruptedException {
         driver = new EdgeDriver();
         driver2 = new EdgeDriver();
         loginPage1 = new LoginPage(driver);
-        loginPage1.openTheApp();
-        loginPage2 = new LoginPage(driver2);
-        loginPage2.openTheApp();
         homePage1 = new HomePage(driver);
         homePage2 = new HomePage(driver2);
+        homePage1.openTheApp();
+        loginPage2 = new LoginPage(driver2);
+        homePage2.openTheApp();
         myQuizzesPage = new MyQuizzesPage(driver);
         gamesPage = new GamesPage(driver2);
         driver.manage().window().maximize();

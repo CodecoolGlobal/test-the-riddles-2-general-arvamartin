@@ -26,8 +26,8 @@ public class QuestionTimerTest {
     public void setUp() throws InterruptedException {
         driver = new EdgeDriver();
         loginPage = new LoginPage(driver);
-        loginPage.openTheApp();
         homePage= new HomePage(driver);
+        homePage.openTheApp();
         myQuizzesPage = new MyQuizzesPage(driver);
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(3));

@@ -105,3 +105,5 @@ they can join in.
 * Tests:
     - userCanChooseCorrectAnswer: Verifies selecting a single correct answer.
     - userCanChooseMultipleCorrectAnswers: Checks selecting multiple correct answers.
+    - userCantCreateQuizWithoutChoosingAnAnswer: Checks if it is possible to create a quiz without 
+    choosing correct answer.

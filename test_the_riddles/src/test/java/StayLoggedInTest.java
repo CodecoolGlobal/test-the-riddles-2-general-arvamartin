@@ -26,7 +26,7 @@ class StayLoggedInTest {
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
-        loginPage.openTheApp();
+        homePage.openTheApp();
         driver.manage().window().maximize();
         homePage.navigateToLoginPage();
 

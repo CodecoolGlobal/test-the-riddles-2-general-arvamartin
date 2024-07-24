@@ -29,9 +29,9 @@ public class ChooseCorrectAnswerTest {
     public void setUp() throws InterruptedException {
         driver = new EdgeDriver();
         loginPage = new LoginPage(driver);
-        loginPage.openTheApp();
-        myQuizzesPage = new MyQuizzesPage(driver);
         homePage = new HomePage(driver);
+        homePage.openTheApp();
+        myQuizzesPage = new MyQuizzesPage(driver);
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(3));
         homePage.navigateToLoginPage();
