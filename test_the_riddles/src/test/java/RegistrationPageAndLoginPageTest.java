@@ -23,6 +23,7 @@ class RegistrationPageAndLoginPageTest {
     private WebDriver driver;
     private RegistrationPage registrationPage;
     private LoginPage loginPage;
+    private HomePage homePage;
 
 
     @BeforeEach
@@ -30,14 +31,14 @@ class RegistrationPageAndLoginPageTest {
         driver = new EdgeDriver();
         registrationPage = new RegistrationPage(driver);
         loginPage = new LoginPage(driver);
+        homePage = new HomePage(driver);
         loginPage.openTheApp();
         driver.manage().window().maximize();
+        homePage.navigateToRegistrationPage();
     }
 
     @Test
     public void userCanRegistrateAndLoginWithTheChosenCredentials() throws InterruptedException {
-        registrationPage.clickToSignUp();
-
         String username = registrationPage.fillTheUserName(System.getenv("USER_NAME"));
         registrationPage.fillTheUserEmail(System.getenv("EMAIL"));
         String password = registrationPage.fillTheUserPassword(System.getenv("PASSWORD"));
@@ -48,8 +49,6 @@ class RegistrationPageAndLoginPageTest {
 
     @Test
     public void userCanRegistrateOnlyWithProperEmailAddress() throws InterruptedException {
-        registrationPage.clickToSignUp();
-
         String username = registrationPage.fillTheUserName(System.getenv("USER_NAME"));
         registrationPage.fillTheUserEmail("test");
         String password = registrationPage.fillTheUserPassword(System.getenv("PASSWORD"));
@@ -61,7 +60,6 @@ class RegistrationPageAndLoginPageTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/src/resources/RegistrationData.csv", numLinesToSkip = 1)
     public void createQuizWithValidInputFields(String inputUsername, String inputEmail, String inputPassword) throws InterruptedException {
-        registrationPage.clickToSignUp();
 
         String username = registrationPage.fillTheUserName(inputUsername);
         registrationPage.fillTheUserEmail(inputEmail);

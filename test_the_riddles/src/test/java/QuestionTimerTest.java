@@ -13,20 +13,26 @@ import java.time.Duration;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class QuestionTimerTest {
-    WebDriver driver;
-    MyQuizzesPage myQuizzesPage;
-    LoginPage loginPage;
-    WebDriverWait wait;
+   private WebDriver driver;
+   private MyQuizzesPage myQuizzesPage;
+   private LoginPage loginPage;
+   private WebDriverWait wait;
+   private HomePage homePage;
+    private String userName= System.getenv("USER_NAME");
+    private String password= System.getenv("PASSWORD");
 
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws InterruptedException {
         driver = new EdgeDriver();
         loginPage = new LoginPage(driver);
         loginPage.openTheApp();
+        homePage= new HomePage(driver);
         myQuizzesPage = new MyQuizzesPage(driver);
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        homePage.navigateToLoginPage();
+        loginPage.login(userName,password);
     }
 
     @AfterEach
@@ -37,9 +43,6 @@ public class QuestionTimerTest {
    @Test
     void userCanSetTime() throws InterruptedException {
         String expected = "15";
-        WebElement loginBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a[1]/button/span")));
-        loginBtn.click();
-        loginPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
         myQuizzesPage.clickOnMyQuizzesBtn();
         myQuizzesPage.clickOnAddQuizBtn();
         myQuizzesPage.clickOnAddQuestionBtn();
@@ -53,9 +56,6 @@ public class QuestionTimerTest {
     void userCannotSetNegativeTime() throws InterruptedException {
         String time = "-15";
         String expected = "0";
-        WebElement loginBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a[1]/button/span")));
-        loginBtn.click();
-        loginPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
         myQuizzesPage.clickOnMyQuizzesBtn();
         myQuizzesPage.clickOnAddQuizBtn();
         myQuizzesPage.clickOnAddQuestionBtn();
@@ -67,10 +67,6 @@ public class QuestionTimerTest {
     @Test
     void onlyNumbersCanBeAcceptedAsTime() throws InterruptedException {
         String letter = "m";
-        WebElement loginBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a[1]/button/span")));
-
-        loginBtn.click();
-        loginPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
         myQuizzesPage.clickOnMyQuizzesBtn();
         myQuizzesPage.clickOnAddQuizBtn();
         myQuizzesPage.clickOnAddQuestionBtn();

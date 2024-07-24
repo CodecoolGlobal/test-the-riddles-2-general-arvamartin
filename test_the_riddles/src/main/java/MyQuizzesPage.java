@@ -58,6 +58,8 @@ public class MyQuizzesPage {
     private WebElement saveEditedQuestionBtn;
     @FindBy(xpath = "/html/body/div/button")
     private WebElement resultBtn;
+    @FindBy(xpath = "//*[@id=\"root\"]/div/div[2]/div/div[1]/div/button/text()[1]")
+    private WebElement questionNumber;
 
     public MyQuizzesPage(WebDriver driver) {
         this.driver = driver;
@@ -156,5 +158,9 @@ public class MyQuizzesPage {
     public void checkTheResults() throws InterruptedException {
         Thread.sleep(3000);
         wait.until(ExpectedConditions.elementToBeClickable(resultBtn)).click();
+    }
+
+    public String checkQuestionNumber() {
+        return  questionNumber.getText();
     }
 }

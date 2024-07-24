@@ -19,6 +19,7 @@ class MyQuizzesPageTest {
     private MyQuizzesPage myQuizzesPage;
     private LoginPage loginPage;
     private WebDriverWait wait;
+    private HomePage homePage;
 
 
     @BeforeEach
@@ -26,12 +27,12 @@ class MyQuizzesPageTest {
         driver = new EdgeDriver();
         loginPage = new LoginPage(driver);
         loginPage.openTheApp();
+        homePage = new HomePage(driver);
         myQuizzesPage = new MyQuizzesPage(driver);
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 
-        WebElement loginBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a[1]/button/span")));
-        loginBtn.click();
+        homePage.navigateToLoginPage();
         loginPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
         myQuizzesPage.clickOnMyQuizzesBtn();
     }

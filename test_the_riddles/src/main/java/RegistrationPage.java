@@ -13,8 +13,6 @@ public class RegistrationPage {
     private final WebDriver driver;
     private final WebDriverWait wait;
 
-    @FindBy(xpath = "/html/body/div/div/div[1]/nav/div/div[2]/a[2]/button/span")
-    private WebElement signUpBtn;
     @FindBy(xpath = "/html/body/div/div/div[2]/div/div/div[2]/div[1]/input")
     private WebElement userNameInput;
     @FindBy(xpath = "/html/body/div/div/div[2]/div/div/div[2]/div[2]/input")
@@ -28,11 +26,6 @@ public class RegistrationPage {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
-    }
-
-
-    public void clickToSignUp() {
-             wait.until(ExpectedConditions.visibilityOf(signUpBtn)).click();
     }
 
     public String fillTheUserName(String userName) throws InterruptedException {
