@@ -2,6 +2,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -14,31 +16,53 @@ public class MyQuizzesPage {
     private final WebDriver driver;
     private final WebDriverWait wait;
 
-    private final By myQuizzesBtn = By.xpath("//*[@id=\"root\"]/div/div[1]/nav/div/div[1]/ul/li[3]/a/span");
-    private final By addQuizBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/button");
-    private final By addQuestionBtn = By.xpath("//*[@id=\"root\"]/div/div[2]/div/div[1]/button");
-    private final By questionTitleInput = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[1]/input");
-    private final By answerInputOne = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[3]/div[2]/div/div[1]/input");
-    private final By getAnswerInputTwo = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[3]/div[3]/div/div[1]/input");
-    private final By saveBtn = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[4]/button[1]");
-    private final By deleteBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/div[1]/button[1]");
-    private final By playBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/div/button[3]");
-    private final By createGameLobbyBtn = By.xpath("/html/body/div/div/button");
-    private final By startBtn = By.xpath("/html/body/div/div/div/div[2]/button");
-    private final By checkBoxOne = By.xpath("//*[@id=\"checkbox-1\"]");
-    private final By checkBoxTwo = By.xpath("//*[@id=\"checkbox-2\"]");
-    private final By timer = By.xpath("//*[@id=\"-1time\"]");
-    private final By editBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/div/button[2]");
-    private final By quizTitleInput = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[1]/input");
-    private final By saveNewQuizTitle = By.xpath("/html/body/div/div/div[2]/div/div[2]/button[1]");
-    private final By questionBtn = By.xpath("/html/body/div/div/div[2]/div/div[1]/div/button");
-    private final By questionInput = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[1]/input");
-    private final By saveEditedQuestionBtn = By.xpath("/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[4]/button[1]");
-    private final By resultBtn = By.xpath("/html/body/div/button");
+    @FindBy(xpath = "//*[@id=\"root\"]/div/div[1]/nav/div/div[1]/ul/li[3]/a/span")
+    private WebElement myQuizzesBtn;
+    @FindBy(xpath = "/html/body/div/div/div[2]/div/div[1]/button")
+    private WebElement addQuizBtn;
+    @FindBy(xpath = "//*[@id=\"root\"]/div/div[2]/div/div[1]/button")
+    private WebElement addQuestionBtn;
+    @FindBy(xpath = "/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[1]/input")
+    private WebElement questionTitleInput;
+    @FindBy(xpath = "/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[3]/div[2]/div/div[1]/input")
+    private WebElement answerInputOne;
+    @FindBy(xpath = "/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[3]/div[3]/div/div[1]/input")
+    private WebElement getAnswerInputTwo;
+    @FindBy(xpath = "/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[4]/button[1]")
+    private WebElement saveBtn;
+    @FindBy(xpath = "/html/body/div/div/div[2]/div/div[1]/div[1]/button[1]")
+    private WebElement deleteBtn;
+    @FindBy(xpath = "/html/body/div/div/div[2]/div/div[1]/div/button[3]")
+    private WebElement playBtn;
+    @FindBy(xpath = "/html/body/div/div/button")
+    private WebElement createGameLobbyBtn;
+    @FindBy(xpath = "/html/body/div/div/div/div[2]/button")
+    private WebElement startBtn;
+    @FindBy(xpath = "//*[@id=\"checkbox-1\"]")
+    private WebElement checkBoxOne;
+    @FindBy(xpath = "//*[@id=\"checkbox-2\"]")
+    private WebElement checkBoxTwo;
+    @FindBy(xpath = "//*[@id=\"-1time\"]")
+    private WebElement timer;
+    @FindBy(xpath = "/html/body/div/div/div[2]/div/div[1]/div/button[2]")
+    private WebElement editBtn;
+    @FindBy(xpath = "/html/body/div/div/div[2]/div/div[2]/div[1]/input")
+    private WebElement quizTitleInput;
+    @FindBy(xpath = "/html/body/div/div/div[2]/div/div[2]/button[1]")
+    private WebElement saveNewQuizTitle;
+    @FindBy(xpath = "/html/body/div/div/div[2]/div/div[1]/div/button")
+    private WebElement questionBtn;
+    @FindBy(xpath = "/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[1]/input")
+    private WebElement questionInput;
+    @FindBy(xpath = "/html/body/div/div/div[2]/div/div[2]/div[2]/div/div[4]/button[1]")
+    private WebElement saveEditedQuestionBtn;
+    @FindBy(xpath = "/html/body/div/button")
+    private WebElement resultBtn;
 
     public MyQuizzesPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        PageFactory.initElements(driver, this);
     }
 
     public boolean testResponsiveLayout(Dimension dimension) {
@@ -55,40 +79,39 @@ public class MyQuizzesPage {
 
     public void clickOnMyQuizzesBtn() throws InterruptedException {
         Thread.sleep(2000);
-        WebElement btn = driver.findElement(myQuizzesBtn);
-        btn.click();
+        wait.until(ExpectedConditions.elementToBeClickable(myQuizzesBtn)).click();
     }
 
     public void clickOnAddQuizBtn() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(addQuizBtn)).click();
+        wait.until(ExpectedConditions.visibilityOf(addQuizBtn)).click();
     }
 
     public void clickOnAddQuestionBtn() throws InterruptedException {
         Thread.sleep(2000);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(addQuestionBtn)).click();
+        wait.until(ExpectedConditions.visibilityOf(addQuestionBtn)).click();
     }
 
     public void fillAndSaveTheQuestionModal(String questionTitle, String answerOne, String answerTwo) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(questionTitleInput)).sendKeys(questionTitle);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(answerInputOne)).sendKeys(answerOne);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(getAnswerInputTwo)).sendKeys(answerTwo);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(saveBtn)).click();
+        wait.until(ExpectedConditions.visibilityOf(questionTitleInput)).sendKeys(questionTitle);
+        wait.until(ExpectedConditions.visibilityOf(answerInputOne)).sendKeys(answerOne);
+        wait.until(ExpectedConditions.visibilityOf(getAnswerInputTwo)).sendKeys(answerTwo);
+        wait.until(ExpectedConditions.visibilityOf(saveBtn)).click();
     }
 
     public void deleteQuiz() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(deleteBtn)).click();
+        wait.until(ExpectedConditions.visibilityOf(deleteBtn)).click();
     }
 
     public void modifyQuizTitle(String newTitle) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(editBtn)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(quizTitleInput)).sendKeys(newTitle);
+        wait.until(ExpectedConditions.visibilityOf(editBtn)).click();
+        wait.until(ExpectedConditions.visibilityOf(quizTitleInput)).sendKeys(newTitle);
         wait.until(ExpectedConditions.elementToBeClickable(saveNewQuizTitle)).click();
     }
 
     public void modifyQuestion(String newQuestion) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(editBtn)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(questionBtn)).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(questionInput)).sendKeys(newQuestion);
+        wait.until(ExpectedConditions.visibilityOf(editBtn)).click();
+        wait.until(ExpectedConditions.visibilityOf(questionBtn)).click();
+        wait.until(ExpectedConditions.visibilityOf(questionInput)).sendKeys(newQuestion);
         wait.until(ExpectedConditions.elementToBeClickable(saveEditedQuestionBtn)).click();
     }
 
@@ -98,15 +121,15 @@ public class MyQuizzesPage {
     }
 
     public void clickOnPlayBtn() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(playBtn)).click();
+        wait.until(ExpectedConditions.visibilityOf(playBtn)).click();
     }
 
     public void clickOnCreateGameLobbyBtn() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(createGameLobbyBtn)).click();
+        wait.until(ExpectedConditions.visibilityOf(createGameLobbyBtn)).click();
     }
 
     public String startBtnText() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(startBtn)).getText();
+        return wait.until(ExpectedConditions.visibilityOf(startBtn)).getText();
     }
 
     public void chooseCheckBoxOne() {
