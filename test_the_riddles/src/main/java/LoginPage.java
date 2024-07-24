@@ -13,7 +13,7 @@ public class LoginPage {
     private final WebDriver driver;
     private final WebDriverWait wait;
 
-    @FindBy(id = "user-name")
+    @FindBy(id ="user-name" )
     private WebElement usernameInput;
     @FindBy(id = "password")
     private WebElement passwordInput;
@@ -41,22 +41,21 @@ public class LoginPage {
 
     public void fillTheUsername(String username) throws InterruptedException {
         Thread.sleep(3000);
-        wait.until(ExpectedConditions.elementToBeClickable(usernameInput));
+        wait.until(ExpectedConditions.visibilityOf(usernameInput));
         usernameInput.sendKeys(username);
     }
 
     public void fillThePassword(String password) {
-        wait.until(ExpectedConditions.elementToBeClickable(passwordInput));
+        wait.until(ExpectedConditions.visibilityOf(passwordInput));
         passwordInput.sendKeys(password);
     }
 
     public void clickOnLoginBtn() {
         wait.until(ExpectedConditions.elementToBeClickable(loginBtn)).click();
-
     }
 
     public WebElement findLogoutBtn() {
-       return wait.until(ExpectedConditions.visibilityOf(logoutBtn));
+        return wait.until(ExpectedConditions.visibilityOf(logoutBtn));
     }
 
 
