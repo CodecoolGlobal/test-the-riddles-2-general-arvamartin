@@ -1,4 +1,3 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -35,7 +34,7 @@ public class RegistrationPage {
              wait.until(ExpectedConditions.visibilityOf(signUpBtn)).click();
     }
 
-    public String fillTheUserName(String userName) throws InterruptedException {
+    public String fillTheUserName(String userName)  {
         wait.until(ExpectedConditions.visibilityOf(userNameInput));
         userNameInput.sendKeys(userName);
         return userName;
