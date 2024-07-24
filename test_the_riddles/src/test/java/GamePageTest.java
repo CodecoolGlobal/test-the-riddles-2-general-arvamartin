@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -20,6 +21,8 @@ public class GamePageTest {
     private WebDriverWait wait2;
     private LoginPage loginPage1;
     private LoginPage loginPage2;
+    private HomePage homePage1;
+    private HomePage homePage2;
     private MyQuizzesPage myQuizzesPage;
     private GamesPage gamesPage;
 
@@ -31,6 +34,8 @@ public class GamePageTest {
         loginPage1.openTheApp();
         loginPage2 = new LoginPage(driver2);
         loginPage2.openTheApp();
+        homePage1 = new HomePage(driver);
+        homePage2 = new HomePage(driver2);
         myQuizzesPage = new MyQuizzesPage(driver);
         gamesPage = new GamesPage(driver2);
         driver.manage().window().maximize();
@@ -38,13 +43,16 @@ public class GamePageTest {
         wait1 = new WebDriverWait(driver, Duration.ofSeconds(3));
         wait2 = new WebDriverWait(driver2, Duration.ofSeconds(3));
 
-        WebElement loginBtn1 = wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a[1]/button/span")));
-        WebElement loginBtn2 = wait2.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div/div[1]/nav/div/div[2]/a[1]/button/span")));
-        loginBtn1.click();
-        loginBtn2.click();
+        homePage1.navigateToLoginPage();
+        homePage2.navigateToLoginPage();
         loginPage1.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
         loginPage2.login(System.getenv("USER_NAME2"), System.getenv("PASSWORD2"));
 
+    }
+
+    @AfterEach
+    void cleanUp() {
+        driver.quit();
     }
 
     @Test
