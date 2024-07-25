@@ -1,11 +1,14 @@
 package PageModels;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import java.util.List;
 import java.util.Objects;
+
 import Enum.SecondsOfSleep;
 
 public class GamesPage extends BasePage {
@@ -26,7 +29,6 @@ public class GamesPage extends BasePage {
     public GamesPage(WebDriver driver) {
         super(driver);
     }
-
 
     public void joinGameLobby(String lobbyTitle) {
         sleep(SecondsOfSleep.ONE_SECOND.getMilliseconds());
@@ -50,7 +52,8 @@ public class GamesPage extends BasePage {
     }
 
     public void navigateToGamesPage() {
-        wait.until(ExpectedConditions.elementToBeClickable(joinGameBtn)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(gamesPageBtn));
+        gamesPageBtn.click();
     }
 
 
@@ -61,5 +64,4 @@ public class GamesPage extends BasePage {
     public void chooseSecondAnswer() {
         wait.until(ExpectedConditions.elementToBeClickable(secondAnswerBtn)).click();
     }
-
 }

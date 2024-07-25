@@ -6,9 +6,8 @@ This project contains automated tests for the Reptile Riddles 1.5.1 quizz game a
 ## Table of Contents
 - [Team Members](#team-members)
 - [Technologies](#technologies)
-- [Project Structure](#project-structure)
 - [Prerequisites](#prerequisites)
-- [User stories](#user-stories)
+- [User stories and their tests](#user-stories-and-their-tests)
 - [Bug report](#bug-report)
 - [Test Details](#test-details)
 
@@ -26,9 +25,6 @@ The following technologies and tools are used in this project:
 * Apache Maven: A build automation tool used for project management and dependency management.
 * WebDriver: A tool for controlling web browsers (in this case, Microsoft Edge(126.0.2592.113)).
 
-## Project Structure
-The project is organized into the following directories and files:
-![alt text](image.png)
 
 ## Prerequisites
 Before running the tests, ensure you have the following installed:
@@ -40,29 +36,62 @@ Before running the tests, ensure you have the following installed:
 
 
 
-## User stories
-1. As a new user, I want to choose my own username and password during registration, so that I can personalize 
-my login credentials.
-2. As a user, I want an option to stay logged in, so that I don’t have to enter my credentials every time.
+## User stories and their tests
+1. As a new user, I want to choose my own username and password during registration, so that I can 
+personalize 
+    - userCanRegisterAndLoginWithChosenCredentials
+    - userCanRegisterOnlyWithProperEmailAddress
+    - createQuizWithValidInputFields
+
+2. As a user, I want an option to stay logged in, so that I don’t have to enter my credentials every 
+time.
+    - testRefreshThePageAndStayedLoggedIn
+    - testOpenNewTabAndStayedLoggedIn
+
 3. As a quiz master, I want to create quizzes so that I can invite others to play.
-4. As a quiz master, I want to select one correct answer for each question so that it is clear if a player got  
-it right or not.
-5. As a quiz master, I want to add more answer options to each question so that I can create a versatile quiz.
-6. As a quiz master, I want to set the time players have to answer each question so that I can configure the    
-difficulty of the questions.
-7. As a quiz master, I want to make modifications to quizzes I had created so that I can make my quizzes better.
+    - userCanCreateQuizzes
+
+4. As a quiz master, I want to select one correct answer for each question so that it is clear if a 
+player got it right or not.
+    - userCanChooseCorrectAnswer
+    - userCantCreateQuizWithoutChoosingAnAnswer
+
+5. As a quiz master, I want to add more answer options to each question so that I can create a versatile 
+quiz.
+    - userCanChooseMultipleCorrectAnswers
+
+6. As a quiz master, I want to set the time players have to answer each question so that I can configure 
+the difficulty of the questions.
+    - userCanSetTime
+    - userCannotSetNegativeTime
+    - onlyNumbersCanBeAcceptedAsTime
+
+7. As a quiz master, I want to make modifications to quizzes I had created so that I can make my quizzes 
+better.
+    - userCanModifyTitleOfExistingQuizzes
+    - userCanModifyTitleOfExistingQuestions
+
 8. As a quiz master, I want to delete a quiz so that I can keep my dashboard clean.
-9. As a quiz master, I want to use my fellow quiz masters' quizzes so that I have more options to organize 
-games.
-10. As a quiz master, I want to open a lobby for a quiz so that players can see what is about to be played and 
-they can join in.
+    - userCanDeleteQuizzes
+
+9. As a quiz master, I want to use my fellow quiz masters' quizzes so that I have more options to 
+organize games.
+10. As a quiz master, I want to open a lobby for a quiz so that players can see what is about to be 
+played and they can join in.
+    - userCanCreateGameLobby
+
 11. As a quiz master, I want to see the results when the game ends so that I can reward the winner.
 12. As a player, I want to play quizzes so that I can compete against others.
+    - testPlayingGame
+
 13. As a player, I want to see what games accept players so that I can choose which one to join.
+    - testPlayingGame
 
 
 ## Bug report
+The project currently has the following known issues:
 ![alt text](image-1.png)
+These issues are listed in the project's task board in the "TO DO" column and are awaiting resolution.
 
 ## Test Details
 ### StayLoggedInTest
@@ -106,4 +135,9 @@ they can join in.
     - userCanChooseCorrectAnswer: Verifies selecting a single correct answer.
     - userCanChooseMultipleCorrectAnswers: Checks selecting multiple correct answers.
     - userCantCreateQuizWithoutChoosingAnAnswer: Checks if it is possible to create a quiz without 
-    choosing correct answer.
+    choosing a correct answer.
+### LoginPageTest
+* Purpose: Tests login functionalities.
+* Tests:
+    - testLoginProcessWithRegisteredCredentials: Verifies login with valid credentials.
+    - testLoginProcessWithUnRegisteredCredentials: Ensures login fails with invalid credentials.

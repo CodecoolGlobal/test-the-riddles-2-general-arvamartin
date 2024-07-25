@@ -61,11 +61,11 @@ public class GamePageTest  extends BaseTest{
     }
 
     @Test
-    void testPlayingGame() throws InterruptedException {
+    void testPlayingGame() {
         myQuizzesPage.clickOnMyQuizzesBtn();
         myQuizzesPage.createLobby();
         gamesPage.navigateToGamesPage();
-        gamesPage.joinGameLobby("test7");
+        gamesPage.joinGameLobby("test10");
         gamesPage.joinGame();
         myQuizzesPage.startGame();
         gamesPage.chooseFirstAnswer();
