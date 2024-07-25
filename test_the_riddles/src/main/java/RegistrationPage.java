@@ -1,4 +1,3 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,7 +22,7 @@ public class RegistrationPage extends BasePage{
         super(driver);
     }
 
-    public String fillTheUserName(String userName) throws InterruptedException {
+    public String fillTheUserName(String userName)  {
         wait.until(ExpectedConditions.visibilityOf(userNameInput));
         userNameInput.sendKeys(userName);
         return userName;
@@ -40,7 +39,7 @@ public class RegistrationPage extends BasePage{
         return password;
     }
 
-    public boolean clickToRegistrate() {
+    public boolean clickToRegister() {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(registrationBtn)).click();
             return true;

@@ -22,13 +22,13 @@ public class LoginPage extends BasePage{
     }
 
 
-    public void login(String username, String password) throws InterruptedException {
+    public void login(String username, String password)  {
         fillTheUsername(username);
         fillThePassword(password);
         clickOnLoginBtn();
     }
 
-    public void fillTheUsername(String username) throws InterruptedException {
+    public void fillTheUsername(String username)  {
         sleep(3000);
         wait.until(ExpectedConditions.visibilityOf(usernameInput));
         usernameInput.sendKeys(username);
@@ -47,5 +47,12 @@ public class LoginPage extends BasePage{
         return wait.until(ExpectedConditions.visibilityOf(logoutBtn));
     }
 
+    public WebElement findLoginBtn() {
+        return wait.until(ExpectedConditions.visibilityOf(loginBtn));
+    }
+
+    public void clickOnLogoutBtn() {
+        wait.until(ExpectedConditions.elementToBeClickable(logoutBtn)).click();
+    }
 
 }

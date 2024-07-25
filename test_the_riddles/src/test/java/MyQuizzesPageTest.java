@@ -21,7 +21,7 @@ class MyQuizzesPageTest extends BaseTest{
 
 
     @BeforeEach
-    public void setUp() throws InterruptedException {
+    public void setUp()  {
         initializeWebDriver();
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
@@ -39,7 +39,7 @@ class MyQuizzesPageTest extends BaseTest{
 
 
     @Test
-    public void userCanCreateQuizzes() throws InterruptedException {
+    public void userCanCreateQuizzes()  {
         myQuizzesPage.clickOnAddQuizBtn();
         myQuizzesPage.clickOnAddQuestionBtn();
         myQuizzesPage.fillAndSaveTheQuestionModal("test", "test", "test");
@@ -69,7 +69,7 @@ class MyQuizzesPageTest extends BaseTest{
     }
 
     @Test
-    public void userCanModifyTitleOfExistingQuestions() throws InterruptedException {
+    public void userCanModifyTitleOfExistingQuestions()  {
         myQuizzesPage.modifyQuestion("newQuestionTitle");
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         String alertText = alert.getText();

@@ -3,13 +3,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
-import java.util.List;
-import java.util.Objects;
 
 public class MyQuizzesPage extends BasePage{
 
@@ -76,7 +70,7 @@ public class MyQuizzesPage extends BasePage{
         return true;
     }
 
-    public void clickOnMyQuizzesBtn() throws InterruptedException {
+    public void clickOnMyQuizzesBtn()  {
         sleep(2000);
         wait.until(ExpectedConditions.elementToBeClickable(myQuizzesBtn)).click();
     }
@@ -85,7 +79,7 @@ public class MyQuizzesPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(addQuizBtn)).click();
     }
 
-    public void clickOnAddQuestionBtn() throws InterruptedException {
+    public void clickOnAddQuestionBtn()  {
         sleep(2000);
         wait.until(ExpectedConditions.visibilityOf(addQuestionBtn)).click();
     }
@@ -152,7 +146,7 @@ public class MyQuizzesPage extends BasePage{
         }
     }
 
-    public void checkTheResults() throws InterruptedException {
+    public void checkTheResults()  {
         sleep(3000);
         wait.until(ExpectedConditions.elementToBeClickable(resultBtn)).click();
     }
