@@ -19,7 +19,7 @@ public class GamesPage extends BasePage{
     private List<WebElement> lobbyContainers;
     @FindBy(xpath = "//*[@id=\"root\"]/div/div/div[2]/button")
     private WebElement joinGameBtn;
-    @FindBy(id = "54")
+    @FindBy(id = "2102")
     private WebElement firstAnswerBtn;
     @FindBy(id = "55")
     private WebElement secondAnswerBtn;

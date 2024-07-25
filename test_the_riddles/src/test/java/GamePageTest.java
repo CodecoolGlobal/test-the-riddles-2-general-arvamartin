@@ -13,11 +13,9 @@ import java.time.Duration;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class GamePageTest  {
+public class GamePageTest  extends BaseTest{
 
-    private WebDriver driver;
     private WebDriver driver2;
-    private WebDriverWait wait1;
     private WebDriverWait wait2;
     private LoginPage loginPage1;
     private LoginPage loginPage2;
@@ -26,10 +24,14 @@ public class GamePageTest  {
     private MyQuizzesPage myQuizzesPage;
     private GamesPage gamesPage;
 
+    private final int WAIT_SECONDS = 3;
+    private final String SECOND_USER_USERNAME = "abc";
+    private final String SECOND_USER_PASSWORD = "abc";
+
 
     @BeforeEach
     public void setUp() throws InterruptedException {
-        driver = new EdgeDriver();
+        initializeWebDriver();
         driver2 = new EdgeDriver();
         loginPage1 = new LoginPage(driver);
         homePage1 = new HomePage(driver);
@@ -39,37 +41,33 @@ public class GamePageTest  {
         homePage2.openTheApp();
         myQuizzesPage = new MyQuizzesPage(driver);
         gamesPage = new GamesPage(driver2);
-        driver.manage().window().maximize();
         driver2.manage().window().maximize();
-        wait1 = new WebDriverWait(driver, Duration.ofSeconds(3));
-        wait2 = new WebDriverWait(driver2, Duration.ofSeconds(3));
+        wait2 = new WebDriverWait(driver2, Duration.ofSeconds(WAIT_SECONDS));
 
         homePage1.navigateToLoginPage();
         homePage2.navigateToLoginPage();
         loginPage1.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
-        loginPage2.login(System.getenv("USER_NAME2"), System.getenv("PASSWORD2"));
-
+        loginPage2.login(SECOND_USER_USERNAME, SECOND_USER_PASSWORD);
     }
 
     @AfterEach
     void cleanUp() {
-        driver.quit();
+        quitDriver();
+        driver2.quit();
     }
 
     @Test
     void testPlayingGame() throws InterruptedException {
-
         myQuizzesPage.clickOnMyQuizzesBtn();
         myQuizzesPage.createLobby();
         gamesPage.navigateToGamesPage();
-        gamesPage.joinGameLobby("test1");
+        gamesPage.joinGameLobby("test7");
         gamesPage.joinGame();
         myQuizzesPage.startGame();
         gamesPage.chooseFirstAnswer();
         myQuizzesPage.checkTheResults();
 
-        WebElement scoreBoard = wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div[1]/div")));
+        WebElement scoreBoard = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div[1]/div")));
         assertEquals("SCOREBOARD", scoreBoard.getText());
-
     }
 }
