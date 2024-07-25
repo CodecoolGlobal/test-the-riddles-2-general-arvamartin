@@ -52,9 +52,9 @@ public class GamesPage extends BasePage{
     }
 
     public void navigateToGamesPage() {
-        wait.until(ExpectedConditions.elementToBeClickable(gamesPageBtn));
-        gamesPageBtn.click();
+        wait.until(ExpectedConditions.elementToBeClickable(joinGameBtn)).click();
     }
+
 
     public void chooseFirstAnswer() {
         wait.until(ExpectedConditions.elementToBeClickable(firstAnswerBtn)).click();

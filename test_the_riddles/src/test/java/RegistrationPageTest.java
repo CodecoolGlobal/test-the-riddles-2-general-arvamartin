@@ -3,7 +3,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RegistrationPageTest extends BaseTest{
@@ -29,36 +29,46 @@ class RegistrationPageTest extends BaseTest{
     }
 
     @Test
-    public void userCanRegistrateAndLoginWithTheChosenCredentials() throws InterruptedException {
+    public void userCanRegisterAndLoginWithTheChosenCredentials()  {
         String username = registrationPage.fillTheUserName(System.getenv("USER_NAME"));
         registrationPage.fillTheUserEmail(System.getenv("EMAIL"));
         String password = registrationPage.fillTheUserPassword(System.getenv("PASSWORD"));
-        assertTrue(registrationPage.clickToRegistrate());
-       loginPage.login(username, password);
+        registrationPage.clickToRegister();
+        loginPage.login(username, password);
         assertEquals("Logout", loginPage.findLogoutBtn().getText());
     }
 
     @Test
-    public void userCanRegistrateOnlyWithProperEmailAddress() throws InterruptedException {
+    void userCanRegisterWithValidCredentials()  {
+        registrationPage.fillTheUserName(System.getenv("USER_NAME"));
+        registrationPage.fillTheUserEmail(System.getenv("EMAIL"));
+        registrationPage.fillTheUserPassword(System.getenv("PASSWORD"));
+        registrationPage.clickToRegister();
+        String expectedURL = "http://localhost:3000/login";
+        wait.until(ExpectedConditions.urlToBe(expectedURL));
+        String actual = loginPage.findLoginBtn().getText();
+        assertEquals("LOGIN",actual);
+
+    }
+
+    @Test
+    public void userCanRegisterOnlyWithProperEmailAddress()  {
         String username = registrationPage.fillTheUserName(System.getenv("USER_NAME"));
         registrationPage.fillTheUserEmail("test");
         String password = registrationPage.fillTheUserPassword(System.getenv("PASSWORD"));
-        assertTrue(registrationPage.clickToRegistrate());
+        assertTrue(registrationPage.clickToRegister());
         loginPage.login(username, password);
         assertNotEquals("Logout", loginPage.findLogoutBtn().getText());
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/src/resources/RegistrationData.csv", numLinesToSkip = 1)
-    public void RegistrateWithValidInputFields(String inputUsername, String inputEmail, String inputPassword) throws InterruptedException {
-
+    public void RegistrateWithValidInputFields(String inputUsername, String inputEmail, String inputPassword) {
         String username = registrationPage.fillTheUserName(inputUsername);
         registrationPage.fillTheUserEmail(inputEmail);
         String password = registrationPage.fillTheUserPassword(inputPassword);
-        registrationPage.clickToRegistrate();
-
+        registrationPage.clickToRegister();
         loginPage.login(username, password);
-
         assertEquals("Logout", loginPage.findLogoutBtn().getText());
     }
 

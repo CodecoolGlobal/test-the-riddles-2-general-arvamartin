@@ -22,7 +22,7 @@ public class LoginPage extends BasePage{
     }
 
 
-    public void login(String username, String password) {
+    public void login(String username, String password)  {
         fillTheUsername(username);
         fillThePassword(password);
         clickOnLoginBtn();
@@ -47,5 +47,12 @@ public class LoginPage extends BasePage{
         return wait.until(ExpectedConditions.visibilityOf(logoutBtn));
     }
 
+    public WebElement findLoginBtn() {
+        return wait.until(ExpectedConditions.visibilityOf(loginBtn));
+    }
+
+    public void clickOnLogoutBtn() {
+        wait.until(ExpectedConditions.elementToBeClickable(logoutBtn)).click();
+    }
 
 }
