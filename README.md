@@ -76,7 +76,7 @@ they can join in.
 * Purpose: Checks UI responsiveness across different screen sizes.
 * Tests:
     - testResponsiveUI: Tests UI on desktop, tablet, and mobile dimensions.
-### RegistrationPageAndLoginPageTest
+### RegistrationPageTest
 * Purpose: Tests user registration and login functionalities.
 * Tests:
     - userCanRegisterAndLoginWithChosenCredentials: Registers and logs in a user.

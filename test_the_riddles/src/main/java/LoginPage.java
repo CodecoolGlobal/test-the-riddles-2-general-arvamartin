@@ -22,14 +22,14 @@ public class LoginPage extends BasePage{
     }
 
 
-    public void login(String username, String password) throws InterruptedException {
+    public void login(String username, String password) {
         fillTheUsername(username);
         fillThePassword(password);
         clickOnLoginBtn();
     }
 
-    public void fillTheUsername(String username) throws InterruptedException {
-        sleep(3000);
+    public void fillTheUsername(String username)  {
+        sleep(SecondsOfSleep.THREE_SECONDS.getMilliseconds());
         wait.until(ExpectedConditions.visibilityOf(usernameInput));
         usernameInput.sendKeys(username);
     }

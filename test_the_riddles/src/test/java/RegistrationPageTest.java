@@ -1,24 +1,12 @@
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.List;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RegistrationPageAndLoginPageTest extends BaseTest{
+class RegistrationPageTest extends BaseTest{
 
     private RegistrationPage registrationPage;
     private LoginPage loginPage;
@@ -33,6 +21,11 @@ class RegistrationPageAndLoginPageTest extends BaseTest{
         homePage = new HomePage(driver);
         homePage.openTheApp();
         homePage.navigateToRegistrationPage();
+    }
+
+    @AfterEach
+    public void cleanUp() {
+        quitDriver();
     }
 
     @Test
@@ -57,7 +50,7 @@ class RegistrationPageAndLoginPageTest extends BaseTest{
 
     @ParameterizedTest
     @CsvFileSource(resources = "/src/resources/RegistrationData.csv", numLinesToSkip = 1)
-    public void createQuizWithValidInputFields(String inputUsername, String inputEmail, String inputPassword) throws InterruptedException {
+    public void RegistrateWithValidInputFields(String inputUsername, String inputEmail, String inputPassword) throws InterruptedException {
 
         String username = registrationPage.fillTheUserName(inputUsername);
         registrationPage.fillTheUserEmail(inputEmail);
@@ -70,8 +63,5 @@ class RegistrationPageAndLoginPageTest extends BaseTest{
     }
 
 
-    @AfterEach
-    public void closeTheApp(){
-        driver.quit();
-    }
+
 }

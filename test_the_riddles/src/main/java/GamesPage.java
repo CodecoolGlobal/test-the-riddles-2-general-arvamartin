@@ -30,8 +30,8 @@ public class GamesPage extends BasePage{
     }
 
 
-    public void joinGameLobby(String lobbyTitle) throws InterruptedException {
-        sleep(1000);
+    public void joinGameLobby(String lobbyTitle) {
+        sleep(SecondsOfSleep.ONE_SECOND.getMilliseconds());
         wait.until(ExpectedConditions.visibilityOfAllElements(lobbyContainers));
 
         for (WebElement lobbyContainer : lobbyContainers) {
@@ -46,12 +46,12 @@ public class GamesPage extends BasePage{
         System.out.println("Cannot find the proper lobby");
     }
 
-    public void joinGame() throws InterruptedException {
-        Thread.sleep(1000);
+    public void joinGame() {
+        sleep(SecondsOfSleep.ONE_SECOND.getMilliseconds());
         wait.until(ExpectedConditions.elementToBeClickable(joinGameBtn)).click();
     }
 
-    public void navigateToGamesPage() throws InterruptedException {
+    public void navigateToGamesPage() {
         wait.until(ExpectedConditions.elementToBeClickable(gamesPageBtn));
         gamesPageBtn.click();
     }

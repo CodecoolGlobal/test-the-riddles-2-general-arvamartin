@@ -76,8 +76,8 @@ public class MyQuizzesPage extends BasePage{
         return true;
     }
 
-    public void clickOnMyQuizzesBtn() throws InterruptedException {
-        sleep(2000);
+    public void clickOnMyQuizzesBtn() {
+        sleep(SecondsOfSleep.TWO_SECONDS.getMilliseconds());
         wait.until(ExpectedConditions.elementToBeClickable(myQuizzesBtn)).click();
     }
 
@@ -85,8 +85,8 @@ public class MyQuizzesPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(addQuizBtn)).click();
     }
 
-    public void clickOnAddQuestionBtn() throws InterruptedException {
-        sleep(2000);
+    public void clickOnAddQuestionBtn() {
+        sleep(SecondsOfSleep.TWO_SECONDS.getMilliseconds());
         wait.until(ExpectedConditions.visibilityOf(addQuestionBtn)).click();
     }
 
@@ -152,8 +152,8 @@ public class MyQuizzesPage extends BasePage{
         }
     }
 
-    public void checkTheResults() throws InterruptedException {
-        sleep(3000);
+    public void checkTheResults() {
+        sleep(SecondsOfSleep.THREE_SECONDS.getMilliseconds());
         wait.until(ExpectedConditions.elementToBeClickable(resultBtn)).click();
     }
 
