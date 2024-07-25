@@ -14,42 +14,38 @@ import java.time.Duration;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ChooseCorrectAnswerTest {
+public class ChooseCorrectAnswerTest extends BaseTest {
 
-    private WebDriver driver;
     private MyQuizzesPage myQuizzesPage;
     private LoginPage loginPage;
     private HomePage homePage;
-    private WebDriverWait wait;
-    private String userName= System.getenv("USER_NAME");
-    private String password= System.getenv("PASSWORD");
-
 
     @BeforeEach
     public void setUp() throws InterruptedException {
-        driver = new EdgeDriver();
+        initializeWebDriver();
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
         homePage.openTheApp();
         myQuizzesPage = new MyQuizzesPage(driver);
-        driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+
         homePage.navigateToLoginPage();
-        loginPage.login(userName,password);
+        loginPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
         myQuizzesPage.clickOnMyQuizzesBtn();
     }
 
     @AfterEach
-    void cleanUp() {
-        driver.quit();
+    public void cleanUp() {
+        quitDriver();
     }
+
 
     @Test
     void userCanChooseCorrectAnswer() throws InterruptedException {
         myQuizzesPage.clickOnAddQuizBtn();
         myQuizzesPage.clickOnAddQuestionBtn();
         myQuizzesPage.chooseCheckBoxOne();
-        Boolean actual = driver.findElement(By.xpath("//*[@id=\"checkbox-1\"]")).isSelected();
+        boolean actual = driver.findElement(By.xpath("//*[@id=\"checkbox-1\"]")).isSelected();
         assertTrue(actual);
     }
 
@@ -65,7 +61,7 @@ public class ChooseCorrectAnswerTest {
     }
 
     @Test
-    void userCantCreateQuizWithoutChoosingAnAnswer() throws InterruptedException {
+    void userCannotCreateQuizWithoutChoosingAnAnswer() throws InterruptedException {
         myQuizzesPage.clickOnAddQuizBtn();
         String expected = driver.findElement(By.xpath("/html/body/div/div/div[2]/div/div[1]/div")).getText();
         myQuizzesPage.clickOnAddQuestionBtn();

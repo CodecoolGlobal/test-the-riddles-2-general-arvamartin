@@ -12,11 +12,9 @@ import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class QuestionTimerTest {
-   private WebDriver driver;
+public class QuestionTimerTest extends BaseTest{
    private MyQuizzesPage myQuizzesPage;
    private LoginPage loginPage;
-   private WebDriverWait wait;
    private HomePage homePage;
     private String userName= System.getenv("USER_NAME");
     private String password= System.getenv("PASSWORD");
@@ -24,20 +22,18 @@ public class QuestionTimerTest {
 
     @BeforeEach
     public void setUp() throws InterruptedException {
-        driver = new EdgeDriver();
+        initializeWebDriver();
         loginPage = new LoginPage(driver);
         homePage= new HomePage(driver);
         homePage.openTheApp();
         myQuizzesPage = new MyQuizzesPage(driver);
-        driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(3));
         homePage.navigateToLoginPage();
         loginPage.login(userName,password);
     }
 
     @AfterEach
-    void cleanUp() {
-        driver.quit();
+    public void cleanUp() {
+        quitDriver();
     }
 
    @Test

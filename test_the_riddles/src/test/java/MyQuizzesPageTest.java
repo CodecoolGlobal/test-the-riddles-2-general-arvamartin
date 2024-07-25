@@ -13,28 +13,28 @@ import java.time.Duration;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-class MyQuizzesPageTest {
+class MyQuizzesPageTest extends BaseTest{
 
-    private WebDriver driver;
     private MyQuizzesPage myQuizzesPage;
     private LoginPage loginPage;
-    private WebDriverWait wait;
     private HomePage homePage;
 
 
     @BeforeEach
     public void setUp() throws InterruptedException {
-        driver = new EdgeDriver();
+        initializeWebDriver();
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
         homePage.openTheApp();
         myQuizzesPage = new MyQuizzesPage(driver);
-        driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-
         homePage.navigateToLoginPage();
         loginPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
         myQuizzesPage.clickOnMyQuizzesBtn();
+    }
+
+    @AfterEach
+    public void cleanUp() {
+        quitDriver();
     }
 
 
@@ -83,8 +83,5 @@ class MyQuizzesPageTest {
         assertEquals("Start", myQuizzesPage.startBtnText());
     }
 
-    @AfterEach
-    public void closeTheApp() {
-        driver.quit();
-    }
+
 }

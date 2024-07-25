@@ -18,9 +18,8 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RegistrationPageAndLoginPageTest {
+class RegistrationPageAndLoginPageTest extends BaseTest{
 
-    private WebDriver driver;
     private RegistrationPage registrationPage;
     private LoginPage loginPage;
     private HomePage homePage;
@@ -28,12 +27,11 @@ class RegistrationPageAndLoginPageTest {
 
     @BeforeEach
     public void setUp() {
-        driver = new EdgeDriver();
+        initializeWebDriver();
         registrationPage = new RegistrationPage(driver);
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
         homePage.openTheApp();
-        driver.manage().window().maximize();
         homePage.navigateToRegistrationPage();
     }
 

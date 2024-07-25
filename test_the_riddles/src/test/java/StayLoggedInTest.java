@@ -13,23 +13,23 @@ import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class StayLoggedInTest {
+class StayLoggedInTest extends BaseTest{
 
-    private WebDriver driver;
-    private WebDriverWait wait;
     private LoginPage loginPage;
     private HomePage homePage;
 
     @BeforeEach
     public  void setUp() {
-        driver = new EdgeDriver();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        initializeWebDriver();
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
         homePage.openTheApp();
-        driver.manage().window().maximize();
         homePage.navigateToLoginPage();
+    }
 
+    @AfterEach
+    public void cleanUp() {
+        quitDriver();
     }
 
 
@@ -53,9 +53,5 @@ class StayLoggedInTest {
         assertEquals("Logout" ,actual);
     }
 
-    @AfterEach
-    public void closeTheApp() {
-        driver.quit();
-    }
 
 }

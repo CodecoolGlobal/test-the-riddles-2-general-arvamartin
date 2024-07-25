@@ -13,31 +13,27 @@ import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ResponsiveUITest {
+public class ResponsiveUITest extends BaseTest{
 
-    private WebDriver driver;
-    private WebDriverWait wait;
     private LoginPage loginPage;
     private MyQuizzesPage myQuizzesPage;
     private HomePage homePage;
 
     @BeforeEach
     void setUp() throws InterruptedException {
-        driver = new EdgeDriver();
+        initializeWebDriver();
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
         homePage.openTheApp();
         myQuizzesPage = new MyQuizzesPage(driver);
-        driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(3));
         homePage.navigateToLoginPage();
         loginPage.login("test", "test");
         myQuizzesPage.clickOnMyQuizzesBtn();
     }
 
     @AfterEach
-    void tearDown() {
-        driver.quit();
+    public void cleanUp() {
+        quitDriver();
     }
 
     @Test
