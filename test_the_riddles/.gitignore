@@ -1,4 +1,4 @@
-.target/
+
 
 ### IntelliJ IDEA ###
 .idea/
@@ -27,3 +27,4 @@ build/
 
 ### Mac OS ###
 .DS_Store
+/target/

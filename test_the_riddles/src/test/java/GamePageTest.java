@@ -1,3 +1,7 @@
+import PageModels.GamesPage;
+import PageModels.HomePage;
+import PageModels.LoginPage;
+import PageModels.MyQuizzesPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

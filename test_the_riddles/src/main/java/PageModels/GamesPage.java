@@ -1,16 +1,14 @@
+package PageModels;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 import java.util.List;
 import java.util.Objects;
+import Enum.SecondsOfSleep;
 
-public class GamesPage extends BasePage{
+public class GamesPage extends BasePage {
 
 
     @FindBy(xpath = "/html/body/div/div/div[1]/nav/div/div[1]/ul/li[1]/a/span")
