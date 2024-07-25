@@ -3,7 +3,6 @@ import PageModels.LoginPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,7 +33,7 @@ class StayLoggedInTest extends BaseTest {
         Thread.sleep(SLEEP_TIME);
         driver.navigate().refresh();
         Thread.sleep(SLEEP_TIME);
-        String actual = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/nav/div/div[2]/a/button/span")).getText();
+        String actual = loginPage.findLogoutBtn().getText();
         assertEquals("Logout", actual);
     }
 
@@ -42,7 +41,7 @@ class StayLoggedInTest extends BaseTest {
     void testOpenNewTabAndStayedLoggedIn() throws InterruptedException {
         ((JavascriptExecutor) driver).executeScript("window.open('http://localhost:3000/','_blank');");
         Thread.sleep(SLEEP_TIME);
-        String actual = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/nav/div/div[2]/a/button/span")).getText();
+        String actual = loginPage.findLogoutBtn().getText();
         assertEquals("Logout", actual);
     }
 }

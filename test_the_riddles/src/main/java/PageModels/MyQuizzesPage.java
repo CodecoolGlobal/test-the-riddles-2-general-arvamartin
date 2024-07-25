@@ -32,9 +32,9 @@ public class MyQuizzesPage extends BasePage {
     private WebElement createGameLobbyBtn;
     @FindBy(xpath = "/html/body/div/div/div/div[2]/button")
     private WebElement startBtn;
-    @FindBy(xpath = "//*[@id=\"checkbox-1\"]")
+    @FindBy(id = "checkbox-1")
     private WebElement checkBoxOne;
-    @FindBy(xpath = "//*[@id=\"checkbox-2\"]")
+    @FindBy(id = "checkbox-2")
     private WebElement checkBoxTwo;
     @FindBy(xpath = "//*[@id=\"-1time\"]")
     private WebElement timer;
@@ -52,7 +52,7 @@ public class MyQuizzesPage extends BasePage {
     private WebElement saveEditedQuestionBtn;
     @FindBy(xpath = "/html/body/div/button")
     private WebElement resultBtn;
-    @FindBy(xpath = "//*[@id=\"root\"]/div/div[2]/div/div[1]/div/button/text()[1]")
+    @FindBy(xpath = "//*[@id=\"root\"]/div/div[2]/div/div[1]/div/button")
     private WebElement questionNumber;
 
 
@@ -134,6 +134,14 @@ public class MyQuizzesPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(checkBoxTwo)).click();
     }
 
+    public WebElement getCheckBoxOne() {
+        return checkBoxOne;
+    }
+
+    public WebElement getCheckBoxTwo() {
+        return checkBoxTwo;
+    }
+
     public void setTimer(String time) {
         wait.until(ExpectedConditions.elementToBeClickable(timer)).clear();
         wait.until(ExpectedConditions.elementToBeClickable(timer)).sendKeys(time);
@@ -154,5 +162,17 @@ public class MyQuizzesPage extends BasePage {
 
     public String checkQuestionNumber() {
         return questionNumber.getText();
+    }
+
+    public WebElement getQuestionNumberField() {
+        return questionNumber;
+    }
+
+    public void clickOnSaveBtn() {
+        wait.until(ExpectedConditions.elementToBeClickable(saveBtn)).click();
+    }
+
+    public WebElement getTimer() {
+        return  timer;
     }
 }

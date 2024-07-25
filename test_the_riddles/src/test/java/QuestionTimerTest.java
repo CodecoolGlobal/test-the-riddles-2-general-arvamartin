@@ -4,7 +4,6 @@ import PageModels.MyQuizzesPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,7 +15,7 @@ public class QuestionTimerTest extends BaseTest {
     private String password = System.getenv("PASSWORD");
 
     @BeforeEach
-    public void setUp() throws InterruptedException {
+    public void setUp() {
         initializeWebDriver();
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
@@ -38,7 +37,7 @@ public class QuestionTimerTest extends BaseTest {
     void userCanSetTime() {
         String expected = "15";
         myQuizzesPage.setTimer(expected);
-        String actual = driver.findElement(By.xpath("//*[@id=\"-1time\"]")).getAttribute("value");
+        String actual = myQuizzesPage.getTimer().getAttribute("value");
         assertEquals(expected, actual);
     }
 
@@ -47,7 +46,7 @@ public class QuestionTimerTest extends BaseTest {
         String time = "-15";
         String expected = "0";
         myQuizzesPage.setTimer(time);
-        String actual = driver.findElement(By.xpath("//*[@id=\"-1time\"]")).getAttribute("value");
+        String actual = myQuizzesPage.getTimer().getAttribute("value");
         assertEquals(expected, actual);
     }
 
@@ -55,7 +54,7 @@ public class QuestionTimerTest extends BaseTest {
     void onlyNumbersCanBeAcceptedAsTime() {
         String letter = "m";
         myQuizzesPage.setTimer(letter);
-        String actual = driver.findElement(By.xpath("//*[@id=\"-1time\"]")).getAttribute("value");
+        String actual = myQuizzesPage.getTimer().getAttribute("value");
         assertNotEquals(letter, actual);
     }
 }

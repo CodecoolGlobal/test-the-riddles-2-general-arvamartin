@@ -5,7 +5,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -43,7 +42,7 @@ public class ChooseCorrectAnswerTest extends BaseTest {
     void userCanChooseCorrectAnswer() {
         myQuizzesPage.clickOnAddQuestionBtn();
         myQuizzesPage.chooseCheckBoxOne();
-        boolean actual = driver.findElement(By.xpath("//*[@id=\"checkbox-1\"]")).isSelected();
+        boolean actual = myQuizzesPage.getCheckBoxOne().isSelected();
         assertTrue(actual);
     }
 
@@ -52,15 +51,16 @@ public class ChooseCorrectAnswerTest extends BaseTest {
         myQuizzesPage.clickOnAddQuestionBtn();
         myQuizzesPage.chooseCheckBoxOne();
         myQuizzesPage.chooseCheckBoxTwo();
-        Boolean actual1 = driver.findElement(By.xpath("//*[@id=\"checkbox-1\"]")).isSelected();
-        Boolean actual2 = driver.findElement(By.xpath("//*[@id=\"checkbox-2\"]")).isSelected();
+        Boolean actual1 = myQuizzesPage.getCheckBoxOne().isSelected();
+        Boolean actual2 = myQuizzesPage.getCheckBoxTwo().isSelected();
         assertTrue(actual1 && actual2);
     }
 
     @Test
     void userCannotCreateQuizWithoutChoosingAnAnswer() {
-        String expected = driver.findElement(By.xpath("/html/body/div/div/div[2]/div/div[1]/div")).getText();
+        String expected = myQuizzesPage.getQuestionNumberField().getText();
         myQuizzesPage.clickOnAddQuestionBtn();
+        myQuizzesPage.clickOnSaveBtn();
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         alert.accept();
         assertEquals(expected, myQuizzesPage.checkQuestionNumber());

@@ -46,16 +46,18 @@ public class GamesPage extends BasePage {
     }
 
     public void navigateToGamesPage() {
-        wait.until(ExpectedConditions.elementToBeClickable(joinGameBtn)).click();
+        wait.until(ExpectedConditions.visibilityOf(gamesPageBtn));
+        gamesPageBtn.click();
     }
 
 
     public void chooseFirstAnswer() {
-        wait.until(ExpectedConditions.elementToBeClickable(firstAnswerBtn)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(firstAnswerBtn));
+        firstAnswerBtn.click();
     }
 
     public void chooseSecondAnswer() {
-        wait.until(ExpectedConditions.elementToBeClickable(secondAnswerBtn)).click();
+        wait.until(ExpectedConditions.visibilityOf(secondAnswerBtn)).click();
     }
 
 }
