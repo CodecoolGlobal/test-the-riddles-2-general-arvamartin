@@ -7,14 +7,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-class RegistrationPageTest extends BaseTest{
+class RegistrationPageTest extends BaseTest {
 
     private RegistrationPage registrationPage;
     private LoginPage loginPage;
     private HomePage homePage;
-
 
     @BeforeEach
     public void setUp() {
@@ -32,7 +32,7 @@ class RegistrationPageTest extends BaseTest{
     }
 
     @Test
-    public void userCanRegisterAndLoginWithTheChosenCredentials()  {
+    public void userCanRegisterAndLoginWithTheChosenCredentials() {
         String username = registrationPage.fillTheUserName(System.getenv("USER_NAME"));
         registrationPage.fillTheUserEmail(System.getenv("EMAIL"));
         String password = registrationPage.fillTheUserPassword(System.getenv("PASSWORD"));
@@ -42,7 +42,7 @@ class RegistrationPageTest extends BaseTest{
     }
 
     @Test
-    void userCanRegisterWithValidCredentials()  {
+    void userCanRegisterWithValidCredentials() {
         registrationPage.fillTheUserName(System.getenv("USER_NAME"));
         registrationPage.fillTheUserEmail(System.getenv("EMAIL"));
         registrationPage.fillTheUserPassword(System.getenv("PASSWORD"));
@@ -50,12 +50,11 @@ class RegistrationPageTest extends BaseTest{
         String expectedURL = "http://localhost:3000/login";
         wait.until(ExpectedConditions.urlToBe(expectedURL));
         String actual = loginPage.findLoginBtn().getText();
-        assertEquals("LOGIN",actual);
-
+        assertEquals("LOGIN", actual);
     }
 
     @Test
-    public void userCanRegisterOnlyWithProperEmailAddress()  {
+    public void userCanRegisterOnlyWithProperEmailAddress() {
         String username = registrationPage.fillTheUserName(System.getenv("USER_NAME"));
         registrationPage.fillTheUserEmail("test");
         String password = registrationPage.fillTheUserPassword(System.getenv("PASSWORD"));
@@ -66,7 +65,7 @@ class RegistrationPageTest extends BaseTest{
 
     @ParameterizedTest
     @CsvFileSource(resources = "/src/resources/RegistrationData.csv", numLinesToSkip = 1)
-    public void RegistrateWithValidInputFields(String inputUsername, String inputEmail, String inputPassword) {
+    public void RegisterWithValidInputFields(String inputUsername, String inputEmail, String inputPassword) {
         String username = registrationPage.fillTheUserName(inputUsername);
         registrationPage.fillTheUserEmail(inputEmail);
         String password = registrationPage.fillTheUserPassword(inputPassword);
@@ -74,7 +73,4 @@ class RegistrationPageTest extends BaseTest{
         loginPage.login(username, password);
         assertEquals("Logout", loginPage.findLogoutBtn().getText());
     }
-
-
-
 }

@@ -13,7 +13,6 @@ import Enum.SecondsOfSleep;
 
 public class GamesPage extends BasePage {
 
-
     @FindBy(xpath = "/html/body/div/div/div[1]/nav/div/div[1]/ul/li[1]/a/span")
     private WebElement gamesPageBtn;
     @FindBy(xpath = "//div[@class='grow pt-16']/div")
@@ -25,7 +24,6 @@ public class GamesPage extends BasePage {
     @FindBy(id = "55")
     private WebElement secondAnswerBtn;
 
-
     public GamesPage(WebDriver driver) {
         super(driver);
     }
@@ -33,10 +31,8 @@ public class GamesPage extends BasePage {
     public void joinGameLobby(String lobbyTitle) {
         sleep(SecondsOfSleep.ONE_SECOND.getMilliseconds());
         wait.until(ExpectedConditions.visibilityOfAllElements(lobbyContainers));
-
         for (WebElement lobbyContainer : lobbyContainers) {
             WebElement lobbyNameElement = lobbyContainer.findElement(By.xpath(".//span[@class='grow flex align-middle text-lg pl-2 items-center']"));
-
             if (Objects.equals(lobbyNameElement.getText(), lobbyTitle)) {
                 WebElement joinButton = lobbyContainer.findElement(By.xpath(".//button[contains(text(), 'Join')]"));
                 joinButton.click();
@@ -52,16 +48,17 @@ public class GamesPage extends BasePage {
     }
 
     public void navigateToGamesPage() {
-        wait.until(ExpectedConditions.elementToBeClickable(gamesPageBtn));
+        wait.until(ExpectedConditions.visibilityOf(gamesPageBtn));
         gamesPageBtn.click();
     }
 
 
     public void chooseFirstAnswer() {
-        wait.until(ExpectedConditions.elementToBeClickable(firstAnswerBtn)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(firstAnswerBtn));
+        firstAnswerBtn.click();
     }
 
     public void chooseSecondAnswer() {
-        wait.until(ExpectedConditions.elementToBeClickable(secondAnswerBtn)).click();
+        wait.until(ExpectedConditions.visibilityOf(secondAnswerBtn)).click();
     }
 }

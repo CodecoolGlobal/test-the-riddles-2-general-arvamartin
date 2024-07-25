@@ -8,7 +8,7 @@ import org.openqa.selenium.Dimension;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ResponsiveUITest extends BaseTest{
+public class ResponsiveUITest extends BaseTest {
 
     private LoginPage loginPage;
     private MyQuizzesPage myQuizzesPage;

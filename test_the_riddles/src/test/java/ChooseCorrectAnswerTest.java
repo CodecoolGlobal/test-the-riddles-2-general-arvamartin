@@ -5,7 +5,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -21,17 +20,17 @@ public class ChooseCorrectAnswerTest extends BaseTest {
     private HomePage homePage;
 
     @BeforeEach
-    public void setUp() throws InterruptedException {
+    public void setUp() {
         initializeWebDriver();
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
         homePage.openTheApp();
         myQuizzesPage = new MyQuizzesPage(driver);
         wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-
         homePage.navigateToLoginPage();
         loginPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
         myQuizzesPage.clickOnMyQuizzesBtn();
+        myQuizzesPage.clickOnAddQuizBtn();
     }
 
     @AfterEach
@@ -39,34 +38,31 @@ public class ChooseCorrectAnswerTest extends BaseTest {
         quitDriver();
     }
 
-
     @Test
-    void userCanChooseCorrectAnswer() throws InterruptedException {
-        myQuizzesPage.clickOnAddQuizBtn();
+    void userCanChooseCorrectAnswer() {
         myQuizzesPage.clickOnAddQuestionBtn();
         myQuizzesPage.chooseCheckBoxOne();
-        boolean actual = driver.findElement(By.xpath("//*[@id=\"checkbox-1\"]")).isSelected();
+        boolean actual = myQuizzesPage.getCheckBoxOne().isSelected();
         assertTrue(actual);
     }
 
     @Test
-    void userCanChooseMultipleCorrectAnswer() throws InterruptedException {
-        myQuizzesPage.clickOnAddQuizBtn();
+    void userCanChooseMultipleCorrectAnswer() {
         myQuizzesPage.clickOnAddQuestionBtn();
         myQuizzesPage.chooseCheckBoxOne();
         myQuizzesPage.chooseCheckBoxTwo();
-        Boolean actual1 = driver.findElement(By.xpath("//*[@id=\"checkbox-1\"]")).isSelected();
-        Boolean actual2 = driver.findElement(By.xpath("//*[@id=\"checkbox-2\"]")).isSelected();
+        Boolean actual1 = myQuizzesPage.getCheckBoxOne().isSelected();
+        Boolean actual2 = myQuizzesPage.getCheckBoxTwo().isSelected();
         assertTrue(actual1 && actual2);
     }
 
     @Test
-    void userCannotCreateQuizWithoutChoosingAnAnswer() throws InterruptedException {
-        myQuizzesPage.clickOnAddQuizBtn();
-        String expected = driver.findElement(By.xpath("/html/body/div/div/div[2]/div/div[1]/div")).getText();
+    void userCannotCreateQuizWithoutChoosingAnAnswer() {
+        String expected = myQuizzesPage.getQuestionNumberField().getText();
         myQuizzesPage.clickOnAddQuestionBtn();
+        myQuizzesPage.clickOnSaveBtn();
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         alert.accept();
-        assertEquals(expected,myQuizzesPage.checkQuestionNumber());
+        assertEquals(expected, myQuizzesPage.checkQuestionNumber());
     }
 }

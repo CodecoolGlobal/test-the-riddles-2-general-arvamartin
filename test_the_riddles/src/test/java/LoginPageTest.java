@@ -3,6 +3,7 @@ import PageModels.LoginPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -39,5 +40,4 @@ public class LoginPageTest extends BaseTest {
         loginPage.login(UNREGISTERED_USERNAME, UNREGISTERED_PASSWORD);
         assertNotEquals("Logout", loginPage.findLogoutBtn().getText());
     }
-
 }
