@@ -21,6 +21,7 @@ class StayLoggedInTest extends BaseTest {
         homePage = new HomePage(driver);
         homePage.openTheApp();
         homePage.navigateToLoginPage();
+        loginPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
     }
 
     @AfterEach
@@ -30,7 +31,6 @@ class StayLoggedInTest extends BaseTest {
 
     @Test
     void testRefreshThePageAndStayedLoggedIn() throws InterruptedException {
-        loginPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
         Thread.sleep(SLEEP_TIME);
         driver.navigate().refresh();
         Thread.sleep(SLEEP_TIME);
@@ -40,8 +40,6 @@ class StayLoggedInTest extends BaseTest {
 
     @Test
     void testOpenNewTabAndStayedLoggedIn() throws InterruptedException {
-        loginPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
-        Thread.sleep(SLEEP_TIME);
         ((JavascriptExecutor) driver).executeScript("window.open('http://localhost:3000/','_blank');");
         Thread.sleep(SLEEP_TIME);
         String actual = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/nav/div/div[2]/a/button/span")).getText();

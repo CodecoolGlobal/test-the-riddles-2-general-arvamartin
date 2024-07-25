@@ -31,6 +31,7 @@ public class ChooseCorrectAnswerTest extends BaseTest {
         homePage.navigateToLoginPage();
         loginPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
         myQuizzesPage.clickOnMyQuizzesBtn();
+        myQuizzesPage.clickOnAddQuizBtn();
     }
 
     @AfterEach
@@ -40,7 +41,6 @@ public class ChooseCorrectAnswerTest extends BaseTest {
 
     @Test
     void userCanChooseCorrectAnswer() {
-        myQuizzesPage.clickOnAddQuizBtn();
         myQuizzesPage.clickOnAddQuestionBtn();
         myQuizzesPage.chooseCheckBoxOne();
         boolean actual = driver.findElement(By.xpath("//*[@id=\"checkbox-1\"]")).isSelected();
@@ -49,7 +49,6 @@ public class ChooseCorrectAnswerTest extends BaseTest {
 
     @Test
     void userCanChooseMultipleCorrectAnswer() {
-        myQuizzesPage.clickOnAddQuizBtn();
         myQuizzesPage.clickOnAddQuestionBtn();
         myQuizzesPage.chooseCheckBoxOne();
         myQuizzesPage.chooseCheckBoxTwo();
@@ -60,7 +59,6 @@ public class ChooseCorrectAnswerTest extends BaseTest {
 
     @Test
     void userCannotCreateQuizWithoutChoosingAnAnswer() {
-        myQuizzesPage.clickOnAddQuizBtn();
         String expected = driver.findElement(By.xpath("/html/body/div/div/div[2]/div/div[1]/div")).getText();
         myQuizzesPage.clickOnAddQuestionBtn();
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());

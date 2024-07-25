@@ -24,6 +24,9 @@ public class QuestionTimerTest extends BaseTest {
         myQuizzesPage = new MyQuizzesPage(driver);
         homePage.navigateToLoginPage();
         loginPage.login(userName, password);
+        myQuizzesPage.clickOnMyQuizzesBtn();
+        myQuizzesPage.clickOnAddQuizBtn();
+        myQuizzesPage.clickOnAddQuestionBtn();
     }
 
     @AfterEach
@@ -34,9 +37,6 @@ public class QuestionTimerTest extends BaseTest {
     @Test
     void userCanSetTime() {
         String expected = "15";
-        myQuizzesPage.clickOnMyQuizzesBtn();
-        myQuizzesPage.clickOnAddQuizBtn();
-        myQuizzesPage.clickOnAddQuestionBtn();
         myQuizzesPage.setTimer(expected);
         String actual = driver.findElement(By.xpath("//*[@id=\"-1time\"]")).getAttribute("value");
         assertEquals(expected, actual);
@@ -46,9 +46,6 @@ public class QuestionTimerTest extends BaseTest {
     void userCannotSetNegativeTime() {
         String time = "-15";
         String expected = "0";
-        myQuizzesPage.clickOnMyQuizzesBtn();
-        myQuizzesPage.clickOnAddQuizBtn();
-        myQuizzesPage.clickOnAddQuestionBtn();
         myQuizzesPage.setTimer(time);
         String actual = driver.findElement(By.xpath("//*[@id=\"-1time\"]")).getAttribute("value");
         assertEquals(expected, actual);
@@ -57,9 +54,6 @@ public class QuestionTimerTest extends BaseTest {
     @Test
     void onlyNumbersCanBeAcceptedAsTime() {
         String letter = "m";
-        myQuizzesPage.clickOnMyQuizzesBtn();
-        myQuizzesPage.clickOnAddQuizBtn();
-        myQuizzesPage.clickOnAddQuestionBtn();
         myQuizzesPage.setTimer(letter);
         String actual = driver.findElement(By.xpath("//*[@id=\"-1time\"]")).getAttribute("value");
         assertNotEquals(letter, actual);
