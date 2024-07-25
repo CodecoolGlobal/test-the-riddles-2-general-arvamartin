@@ -1,4 +1,5 @@
 package PageModels;
+
 import Enum.SecondsOfSleep;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -8,7 +9,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class MyQuizzesPage extends BasePage {
-
 
     @FindBy(xpath = "//*[@id=\"root\"]/div/div[1]/nav/div/div[1]/ul/li[3]/a/span")
     private WebElement myQuizzesBtn;
@@ -63,7 +63,6 @@ public class MyQuizzesPage extends BasePage {
     public boolean testResponsiveLayout(Dimension dimension) {
         driver.manage().window().setSize(dimension);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("body")));
-
         boolean isTaskBoxCollapsed = driver.findElement(By.xpath("/html/body/div/div/div[2]/div/div[1]")).isDisplayed();
         if (!isTaskBoxCollapsed) {
             System.err.println("Game list is not collapsed!");
@@ -154,6 +153,6 @@ public class MyQuizzesPage extends BasePage {
     }
 
     public String checkQuestionNumber() {
-        return  questionNumber.getText();
+        return questionNumber.getText();
     }
 }

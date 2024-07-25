@@ -1,15 +1,14 @@
 package PageModels;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import Enum.SecondsOfSleep;
 
-
 public class LoginPage extends BasePage {
 
-
-    @FindBy(id ="user-name" )
+    @FindBy(id = "user-name")
     private WebElement usernameInput;
     @FindBy(id = "password")
     private WebElement passwordInput;
@@ -18,19 +17,18 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "/html/body/div/div/div[1]/nav/div/div[2]/a/button/span")
     private WebElement logoutBtn;
 
-
     public LoginPage(WebDriver driver) {
         super(driver);
     }
 
 
-    public void login(String username, String password)  {
+    public void login(String username, String password) {
         fillTheUsername(username);
         fillThePassword(password);
         clickOnLoginBtn();
     }
 
-    public void fillTheUsername(String username)  {
+    public void fillTheUsername(String username) {
         sleep(SecondsOfSleep.THREE_SECONDS.getMilliseconds());
         wait.until(ExpectedConditions.visibilityOf(usernameInput));
         usernameInput.sendKeys(username);

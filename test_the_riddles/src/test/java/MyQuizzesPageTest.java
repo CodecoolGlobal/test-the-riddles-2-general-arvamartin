@@ -9,8 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
-class MyQuizzesPageTest extends BaseTest{
+class MyQuizzesPageTest extends BaseTest {
 
     private MyQuizzesPage myQuizzesPage;
     private LoginPage loginPage;
@@ -18,7 +17,7 @@ class MyQuizzesPageTest extends BaseTest{
 
 
     @BeforeEach
-    public void setUp()  {
+    public void setUp() {
         initializeWebDriver();
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
@@ -34,9 +33,8 @@ class MyQuizzesPageTest extends BaseTest{
         quitDriver();
     }
 
-
     @Test
-    public void userCanCreateQuizzes()  {
+    public void userCanCreateQuizzes() {
         myQuizzesPage.clickOnAddQuizBtn();
         myQuizzesPage.clickOnAddQuestionBtn();
         myQuizzesPage.fillAndSaveTheQuestionModal("test", "test", "test");
@@ -45,7 +43,6 @@ class MyQuizzesPageTest extends BaseTest{
         assertEquals("Save new task?", alertText);
         alert.accept();
     }
-
 
     @Test
     public void userCanDeleteQuizzes() {
@@ -66,7 +63,7 @@ class MyQuizzesPageTest extends BaseTest{
     }
 
     @Test
-    public void userCanModifyTitleOfExistingQuestions()  {
+    public void userCanModifyTitleOfExistingQuestions() {
         myQuizzesPage.modifyQuestion("newQuestionTitle");
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         String alertText = alert.getText();
@@ -79,6 +76,4 @@ class MyQuizzesPageTest extends BaseTest{
         myQuizzesPage.createLobby();
         assertEquals("Start", myQuizzesPage.startBtnText());
     }
-
-
 }

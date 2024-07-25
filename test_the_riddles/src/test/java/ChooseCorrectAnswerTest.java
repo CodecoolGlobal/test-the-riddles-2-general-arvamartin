@@ -21,14 +21,13 @@ public class ChooseCorrectAnswerTest extends BaseTest {
     private HomePage homePage;
 
     @BeforeEach
-    public void setUp() throws InterruptedException {
+    public void setUp() {
         initializeWebDriver();
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
         homePage.openTheApp();
         myQuizzesPage = new MyQuizzesPage(driver);
         wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-
         homePage.navigateToLoginPage();
         loginPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
         myQuizzesPage.clickOnMyQuizzesBtn();
@@ -39,9 +38,8 @@ public class ChooseCorrectAnswerTest extends BaseTest {
         quitDriver();
     }
 
-
     @Test
-    void userCanChooseCorrectAnswer() throws InterruptedException {
+    void userCanChooseCorrectAnswer() {
         myQuizzesPage.clickOnAddQuizBtn();
         myQuizzesPage.clickOnAddQuestionBtn();
         myQuizzesPage.chooseCheckBoxOne();
@@ -50,7 +48,7 @@ public class ChooseCorrectAnswerTest extends BaseTest {
     }
 
     @Test
-    void userCanChooseMultipleCorrectAnswer() throws InterruptedException {
+    void userCanChooseMultipleCorrectAnswer() {
         myQuizzesPage.clickOnAddQuizBtn();
         myQuizzesPage.clickOnAddQuestionBtn();
         myQuizzesPage.chooseCheckBoxOne();
@@ -61,12 +59,12 @@ public class ChooseCorrectAnswerTest extends BaseTest {
     }
 
     @Test
-    void userCannotCreateQuizWithoutChoosingAnAnswer() throws InterruptedException {
+    void userCannotCreateQuizWithoutChoosingAnAnswer() {
         myQuizzesPage.clickOnAddQuizBtn();
         String expected = driver.findElement(By.xpath("/html/body/div/div/div[2]/div/div[1]/div")).getText();
         myQuizzesPage.clickOnAddQuestionBtn();
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         alert.accept();
-        assertEquals(expected,myQuizzesPage.checkQuestionNumber());
+        assertEquals(expected, myQuizzesPage.checkQuestionNumber());
     }
 }

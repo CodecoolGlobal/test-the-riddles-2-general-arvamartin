@@ -16,8 +16,7 @@ import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
-public class GamePageTest  extends BaseTest{
+public class GamePageTest extends BaseTest {
 
     private WebDriver driver2;
     private WebDriverWait wait2;
@@ -34,7 +33,7 @@ public class GamePageTest  extends BaseTest{
 
 
     @BeforeEach
-    public void setUp() throws InterruptedException {
+    public void setUp() {
         initializeWebDriver();
         driver2 = new EdgeDriver();
         loginPage1 = new LoginPage(driver);
@@ -47,7 +46,6 @@ public class GamePageTest  extends BaseTest{
         gamesPage = new GamesPage(driver2);
         driver2.manage().window().maximize();
         wait2 = new WebDriverWait(driver2, Duration.ofSeconds(WAIT_SECONDS));
-
         homePage1.navigateToLoginPage();
         homePage2.navigateToLoginPage();
         loginPage1.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
@@ -61,7 +59,7 @@ public class GamePageTest  extends BaseTest{
     }
 
     @Test
-    void testPlayingGame() throws InterruptedException {
+    void testPlayingGame() {
         myQuizzesPage.clickOnMyQuizzesBtn();
         myQuizzesPage.createLobby();
         gamesPage.navigateToGamesPage();
@@ -70,7 +68,6 @@ public class GamePageTest  extends BaseTest{
         myQuizzesPage.startGame();
         gamesPage.chooseFirstAnswer();
         myQuizzesPage.checkTheResults();
-
         WebElement scoreBoard = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div[1]/div")));
         assertEquals("SCOREBOARD", scoreBoard.getText());
     }
