@@ -28,9 +28,6 @@ public class GamePageTest extends BaseTest {
     private GamesPage gamesPage;
 
     private final int WAIT_SECONDS = 3;
-    private final String SECOND_USER_USERNAME = "abc";
-    private final String SECOND_USER_PASSWORD = "abc";
-
 
     @BeforeEach
     public void setUp() {
@@ -49,7 +46,7 @@ public class GamePageTest extends BaseTest {
         homePage1.navigateToLoginPage();
         homePage2.navigateToLoginPage();
         loginPage1.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
-        loginPage2.login(SECOND_USER_USERNAME, SECOND_USER_PASSWORD);
+        loginPage2.login(System.getenv("USER_NAME2"), System.getenv("PASSWORD2"));
     }
 
     @AfterEach
@@ -69,7 +66,7 @@ public class GamePageTest extends BaseTest {
         myQuizzesPage.startGame();
         gamesPage.chooseFirstAnswer();
         myQuizzesPage.checkTheResults();
-        WebElement scoreBoard = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div[1]/div")));
-        assertEquals("SCOREBOARD", scoreBoard.getText());
+        String actual = gamesPage.getScoreBoardText();
+        assertEquals("SCOREBOARD", actual);
     }
 }

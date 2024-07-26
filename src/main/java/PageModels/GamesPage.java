@@ -23,6 +23,8 @@ public class GamesPage extends BasePage {
     private WebElement firstAnswerBtn;
     @FindBy(id = "55")
     private WebElement secondAnswerBtn;
+    @FindBy(xpath = "/html/body/div/div[1]/div")
+    private WebElement scoreBoard;
 
     public GamesPage(WebDriver driver) {
         super(driver);
@@ -60,5 +62,10 @@ public class GamesPage extends BasePage {
 
     public void chooseSecondAnswer() {
         wait.until(ExpectedConditions.visibilityOf(secondAnswerBtn)).click();
+    }
+
+    public String getScoreBoardText() {
+        wait.until(ExpectedConditions.visibilityOf(scoreBoard));
+        return scoreBoard.getText();
     }
 }

@@ -28,6 +28,7 @@ public class ChooseCorrectAnswerTest extends BaseTest {
         homePage = new HomePage(driver);
         homePage.openTheApp();
         myQuizzesPage = new MyQuizzesPage(driver);
+        quizFormPage = new QuizFormPage(driver);
         wait = new WebDriverWait(driver, Duration.ofSeconds(3));
         homePage.navigateToLoginPage();
         loginPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
@@ -44,7 +45,7 @@ public class ChooseCorrectAnswerTest extends BaseTest {
     void userCanChooseCorrectAnswer() {
         quizFormPage.clickOnAddQuestionBtn();
         quizFormPage.chooseCheckBoxOne();
-        boolean actual = quizFormPage.getCheckBoxOne().isSelected();
+        boolean actual = quizFormPage.isCheckBoxOneSelected();
         assertTrue(actual);
     }
 
@@ -53,14 +54,14 @@ public class ChooseCorrectAnswerTest extends BaseTest {
         quizFormPage.clickOnAddQuestionBtn();
         quizFormPage.chooseCheckBoxOne();
         quizFormPage.chooseCheckBoxTwo();
-        boolean actual1 = quizFormPage.getCheckBoxOne().isSelected();
-        boolean actual2 = quizFormPage.getCheckBoxTwo().isSelected();
+        boolean actual1 = quizFormPage.isCheckBoxOneSelected();
+        boolean actual2 = quizFormPage.isCheckBoxTwoSelected();
         assertTrue(actual1 && actual2);
     }
 
     @Test
     void userCannotCreateQuizWithoutChoosingAnAnswer() {
-        String expected = quizFormPage.getQuestionNumberField().getText();
+        String expected = quizFormPage.getQuestionNumberFromField();
         quizFormPage.clickOnAddQuestionBtn();
         quizFormPage.clickOnSaveBtn();
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());

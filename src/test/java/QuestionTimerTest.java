@@ -17,12 +17,13 @@ public class QuestionTimerTest extends BaseTest {
     private String password = System.getenv("PASSWORD");
 
     @BeforeEach
-    public void setUp() throws InterruptedException {
+    public void setUp() {
         initializeWebDriver();
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
         homePage.openTheApp();
         myQuizzesPage = new MyQuizzesPage(driver);
+        quizFormPage = new QuizFormPage(driver);
         homePage.navigateToLoginPage();
         loginPage.login(userName, password);
         homePage.navigateToMyQuizPage();
@@ -39,7 +40,7 @@ public class QuestionTimerTest extends BaseTest {
     void userCanSetTime() {
         String expected = "15";
         quizFormPage.setTimer(expected);
-        String actual = quizFormPage.getTimer().getAttribute("value");
+        String actual = quizFormPage.getTimer();
         assertEquals(expected, actual);
     }
 
@@ -48,7 +49,7 @@ public class QuestionTimerTest extends BaseTest {
         String time = "-15";
         String expected = "0";
         quizFormPage.setTimer(time);
-        String actual = quizFormPage.getTimer().getAttribute("value");
+        String actual = quizFormPage.getTimer();
         assertEquals(expected, actual);
     }
 
@@ -56,7 +57,7 @@ public class QuestionTimerTest extends BaseTest {
     void onlyNumbersCanBeAcceptedAsTime() {
         String letter = "m";
         quizFormPage.setTimer(letter);
-        String actual = quizFormPage.getTimer().getAttribute("value");
+        String actual = quizFormPage.getTimer();
         assertNotEquals(letter, actual);
     }
 }

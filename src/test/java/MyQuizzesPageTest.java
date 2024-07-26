@@ -25,6 +25,7 @@ class MyQuizzesPageTest extends BaseTest {
         homePage = new HomePage(driver);
         homePage.openTheApp();
         myQuizzesPage = new MyQuizzesPage(driver);
+        quizFormPage = new QuizFormPage(driver);
         homePage.navigateToLoginPage();
         loginPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
         myQuizzesPage.clickOnMyQuizzesBtn();
