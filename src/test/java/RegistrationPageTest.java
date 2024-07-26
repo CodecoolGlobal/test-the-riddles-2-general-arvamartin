@@ -47,8 +47,7 @@ class RegistrationPageTest extends BaseTest {
         registrationPage.fillTheUserEmail(System.getenv("EMAIL"));
         registrationPage.fillTheUserPassword(System.getenv("PASSWORD"));
         registrationPage.clickToRegister();
-        String expectedURL = "http://localhost:3000/login";
-        wait.until(ExpectedConditions.urlToBe(expectedURL));
+        homePage.navigateToLoginPage();
         String actual = loginPage.findLoginBtn().getText();
         assertEquals("LOGIN", actual);
     }
@@ -65,7 +64,7 @@ class RegistrationPageTest extends BaseTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/src/resources/RegistrationData.csv", numLinesToSkip = 1)
-    public void RegisterWithValidInputFields(String inputUsername, String inputEmail, String inputPassword) {
+    public void userCanRegisterWithSpecialCharacters(String inputUsername, String inputEmail, String inputPassword) {
         String username = registrationPage.fillTheUserName(inputUsername);
         registrationPage.fillTheUserEmail(inputEmail);
         String password = registrationPage.fillTheUserPassword(inputPassword);

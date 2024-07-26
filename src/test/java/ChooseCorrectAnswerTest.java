@@ -28,7 +28,7 @@ public class ChooseCorrectAnswerTest extends BaseTest {
         homePage = new HomePage(driver);
         homePage.openTheApp();
         myQuizzesPage = new MyQuizzesPage(driver);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        quizFormPage = new QuizFormPage(driver);
         homePage.navigateToLoginPage();
         loginPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
         homePage.navigateToMyQuizPage();

@@ -23,6 +23,7 @@ public class QuestionTimerTest extends BaseTest {
         homePage = new HomePage(driver);
         homePage.openTheApp();
         myQuizzesPage = new MyQuizzesPage(driver);
+        quizFormPage = new QuizFormPage(driver);
         homePage.navigateToLoginPage();
         loginPage.login(userName, password);
         homePage.navigateToMyQuizPage();

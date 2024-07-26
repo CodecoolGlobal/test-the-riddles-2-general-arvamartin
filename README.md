@@ -41,7 +41,7 @@ Before running the tests, ensure you have the following installed:
 personalize 
     - userCanRegisterAndLoginWithChosenCredentials
     - userCanRegisterOnlyWithProperEmailAddress
-    - createQuizWithValidInputFields
+    - userCanRegisterwithSpecialCharacters
 
 2. As a user, I want an option to stay logged in, so that I don’t have to enter my credentials every 
 time.
