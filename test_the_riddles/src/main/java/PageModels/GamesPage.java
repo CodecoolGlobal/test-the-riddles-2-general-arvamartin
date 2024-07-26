@@ -34,7 +34,7 @@ public class GamesPage extends BasePage {
         for (WebElement lobbyContainer : lobbyContainers) {
             WebElement lobbyNameElement = lobbyContainer.findElement(By.xpath(".//span[@class='grow flex align-middle text-lg pl-2 items-center']"));
             if (Objects.equals(lobbyNameElement.getText(), lobbyTitle)) {
-                WebElement joinButton = lobbyContainer.findElement(By.xpath(".//button[contains(text(), 'Join')]"));
+                WebElement joinButton = lobbyContainer.findElement(By.xpath(".//button[contains(text(), 'Join')]"));  // should go up to the top of the class
                 joinButton.click();
                 return;
             }
@@ -47,7 +47,7 @@ public class GamesPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(joinGameBtn)).click();
     }
 
-    public void navigateToGamesPage() {
+    public void navigateToGamesPage() {   // I recommend navigating through urls
         wait.until(ExpectedConditions.visibilityOf(gamesPageBtn));
         gamesPageBtn.click();
     }

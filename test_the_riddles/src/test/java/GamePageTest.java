@@ -16,10 +16,10 @@ import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class GamePageTest extends BaseTest {
+public class GamePageTest extends BaseTest { 
 
     private WebDriver driver2;
-    private WebDriverWait wait2;
+    private WebDriverWait wait2;  // everything related to waiting belongs to page classes
     private LoginPage loginPage1;
     private LoginPage loginPage2;
     private HomePage homePage1;
@@ -29,7 +29,7 @@ public class GamePageTest extends BaseTest {
 
     private final int WAIT_SECONDS = 3;
     private final String SECOND_USER_USERNAME = "abc";
-    private final String SECOND_USER_PASSWORD = "abc";
+    private final String SECOND_USER_PASSWORD = "abc";  // quizmaster and player username should be different
 
 
     @BeforeEach
@@ -55,7 +55,7 @@ public class GamePageTest extends BaseTest {
     @AfterEach
     void cleanUp() {
         quitDriver();
-        driver2.quit();
+        driver2.quit();  // this doesn't look very elegant, maybe this test class shouldn't extend BaseTest
     }
 
     @Test
@@ -68,7 +68,7 @@ public class GamePageTest extends BaseTest {
         myQuizzesPage.startGame();
         gamesPage.chooseFirstAnswer();
         myQuizzesPage.checkTheResults();
-        WebElement scoreBoard = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div[1]/div")));
+        WebElement scoreBoard = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div[1]/div")));  // TODO: moving this into a page class
         assertEquals("SCOREBOARD", scoreBoard.getText());
     }
 }

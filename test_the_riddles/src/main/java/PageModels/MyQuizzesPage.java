@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class MyQuizzesPage extends BasePage {
+public class MyQuizzesPage extends BasePage {  // you should create a separate QuizFormPage and move stuff there
 
     @FindBy(xpath = "//*[@id=\"root\"]/div/div[1]/nav/div/div[1]/ul/li[3]/a/span")
     private WebElement myQuizzesBtn;
@@ -136,6 +136,10 @@ public class MyQuizzesPage extends BasePage {
 
     public WebElement getCheckBoxOne() {
         return checkBoxOne;
+    }
+
+    public boolean validateCheckBoxOne() {
+        return checkBoxOne.isSelected();
     }
 
     public WebElement getCheckBoxTwo() {

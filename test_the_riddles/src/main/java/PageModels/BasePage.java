@@ -17,9 +17,9 @@ public abstract class BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    protected void sleep(int milliseconds) {
+    protected void sleep(SecondsOfSleep milliseconds) {  
         try {
-            Thread.sleep(milliseconds);
+            Thread.sleep(milliseconds.getMilliseconds());
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             throw new RuntimeException("Thread was interrupted", e);

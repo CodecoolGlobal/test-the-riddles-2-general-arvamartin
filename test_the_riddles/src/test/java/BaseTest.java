@@ -7,7 +7,7 @@ import java.time.Duration;
 public abstract class BaseTest {
 
     protected WebDriver driver;
-    protected WebDriverWait wait;
+    protected WebDriverWait wait;  // waits belong to automation code, should be in BasePage
     protected final int WAIT_SECONDS = 3;
 
     protected void initializeWebDriver() {
