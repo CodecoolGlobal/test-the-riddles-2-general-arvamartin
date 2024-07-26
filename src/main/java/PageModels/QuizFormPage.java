@@ -1,5 +1,6 @@
 package PageModels;
 import Enum.SecondsOfSleep;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -65,6 +66,10 @@ public class QuizFormPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(questionBtn)).click();
         wait.until(ExpectedConditions.visibilityOf(questionInput)).sendKeys(newQuestion);
         wait.until(ExpectedConditions.elementToBeClickable(saveEditedQuestionBtn)).click();
+    }
+
+    public Alert getAlert(){
+        return wait.until(ExpectedConditions.alertIsPresent());
     }
 
     public void chooseCheckBoxOne() {

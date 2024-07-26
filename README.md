@@ -110,7 +110,7 @@ These issues are listed in the project's task board in the "TO DO" column and ar
 * Tests:
     - userCanRegisterAndLoginWithChosenCredentials: Registers and logs in a user.
     - userCanRegisterOnlyWithProperEmailAddress: Tests registration with an invalid email.
-    - createQuizWithValidInputFields: Parameterized test for registration using CSV data.
+    - userCanRegisterwithSpecialCharacters: Parameterized test for registration using CSV data.
 ### QuestionTimerTest
 * Purpose: Tests setting timers for questions.
 * Tests:

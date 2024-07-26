@@ -13,7 +13,7 @@ public class LoginPageTest extends BaseTest {
     private HomePage homePage;
 
     private final String UNREGISTERED_USERNAME = "t e s t";
-    private final String UNREGISTERED_PASSWORD = "t e s t";
+    private final String UNREGISTERED_PASSWORD = "t s e t";
 
     @BeforeEach
     public void setUp() {

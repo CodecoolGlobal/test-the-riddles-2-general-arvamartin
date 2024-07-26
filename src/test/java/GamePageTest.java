@@ -5,21 +5,19 @@ import PageModels.MyQuizzesPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class GamePageTest extends BaseTest {
+public class GamePageTest {
 
+    private WebDriver driver1;
     private WebDriver driver2;
-    private WebDriverWait wait2;
     private LoginPage loginPage1;
     private LoginPage loginPage2;
     private HomePage homePage1;
@@ -27,22 +25,20 @@ public class GamePageTest extends BaseTest {
     private MyQuizzesPage myQuizzesPage;
     private GamesPage gamesPage;
 
-    private final int WAIT_SECONDS = 3;
 
     @BeforeEach
     public void setUp() {
-        initializeWebDriver();
+        driver1 = new EdgeDriver();
         driver2 = new EdgeDriver();
-        loginPage1 = new LoginPage(driver);
-        homePage1 = new HomePage(driver);
+        loginPage1 = new LoginPage(driver1);
+        homePage1 = new HomePage(driver1);
         homePage2 = new HomePage(driver2);
         homePage1.openTheApp();
         loginPage2 = new LoginPage(driver2);
         homePage2.openTheApp();
-        myQuizzesPage = new MyQuizzesPage(driver);
+        myQuizzesPage = new MyQuizzesPage(driver1);
         gamesPage = new GamesPage(driver2);
         driver2.manage().window().maximize();
-        wait2 = new WebDriverWait(driver2, Duration.ofSeconds(WAIT_SECONDS));
         homePage1.navigateToLoginPage();
         homePage2.navigateToLoginPage();
         loginPage1.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
@@ -51,7 +47,7 @@ public class GamePageTest extends BaseTest {
 
     @AfterEach
     void cleanUp() {
-        quitDriver();
+        driver1.quit();
         driver2.quit();
     }
 
@@ -61,7 +57,7 @@ public class GamePageTest extends BaseTest {
         homePage2.navigateToMyQuizPage();
         myQuizzesPage.createLobby();
         gamesPage.navigateToGamesPage();
-        gamesPage.joinGameLobby("test12");
+        gamesPage.joinGameLobby("test16");
         gamesPage.joinGame();
         myQuizzesPage.startGame();
         gamesPage.chooseFirstAnswer();

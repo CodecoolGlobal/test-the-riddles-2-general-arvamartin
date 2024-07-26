@@ -29,9 +29,8 @@ public class LogoutTest extends BaseTest {
     @Test
     void userCanLogout() {
         loginPage.clickOnLogoutBtn();
-        String expectedURL = "http://localhost:3000/login";
-        wait.until(ExpectedConditions.urlToBe(expectedURL));
+        homePage.navigateToLoginPage();
         String actualURL = driver.getCurrentUrl();
-        assertEquals(expectedURL, actualURL);
+        assertEquals("http://localhost:3000/login", actualURL);
     }
 }

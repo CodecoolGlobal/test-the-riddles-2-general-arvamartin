@@ -45,7 +45,7 @@ public class GamesPage extends BasePage {
     }
 
     public void joinGame() {
-        sleep(SecondsOfSleep.ONE_SECOND);
+        sleep(SecondsOfSleep.TWO_SECONDS);
         wait.until(ExpectedConditions.elementToBeClickable(joinGameBtn)).click();
     }
 

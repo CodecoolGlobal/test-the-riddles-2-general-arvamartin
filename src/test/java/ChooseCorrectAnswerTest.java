@@ -6,10 +6,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -63,8 +59,7 @@ public class ChooseCorrectAnswerTest extends BaseTest {
         String expected = quizFormPage.getQuestionNumberFromField();
         quizFormPage.clickOnAddQuestionBtn();
         quizFormPage.clickOnSaveBtn();
-        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
-        alert.accept();
+        quizFormPage.getAlert().accept();
         assertEquals(expected, quizFormPage.checkQuestionNumber());
     }
 }
