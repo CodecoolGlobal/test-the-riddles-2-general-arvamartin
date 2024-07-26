@@ -51,8 +51,8 @@ public class ChooseCorrectAnswerTest extends BaseTest {
         myQuizzesPage.clickOnAddQuestionBtn();
         myQuizzesPage.chooseCheckBoxOne();
         myQuizzesPage.chooseCheckBoxTwo();
-        Boolean actual1 = myQuizzesPage.getCheckBoxOne().isSelected();
-        Boolean actual2 = myQuizzesPage.getCheckBoxTwo().isSelected();
+        boolean actual1 = myQuizzesPage.getCheckBoxOne().isSelected();
+        boolean actual2 = myQuizzesPage.getCheckBoxTwo().isSelected();
         assertTrue(actual1 && actual2);
     }
 

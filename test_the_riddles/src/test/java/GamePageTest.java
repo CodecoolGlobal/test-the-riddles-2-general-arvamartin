@@ -63,10 +63,10 @@ public class GamePageTest extends BaseTest {
         myQuizzesPage.clickOnMyQuizzesBtn();
         myQuizzesPage.createLobby();
         gamesPage.navigateToGamesPage();
-        gamesPage.joinGameLobby("test10");
+        gamesPage.joinGameLobby("test12");
         gamesPage.joinGame();
         myQuizzesPage.startGame();
-        gamesPage.chooseSecondAnswer();
+        gamesPage.chooseFirstAnswer();
         myQuizzesPage.checkTheResults();
         WebElement scoreBoard = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div[1]/div")));
         assertEquals("SCOREBOARD", scoreBoard.getText());
