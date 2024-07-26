@@ -38,7 +38,8 @@ class RegistrationPageTest extends BaseTest {
         String password = registrationPage.fillTheUserPassword(System.getenv("PASSWORD"));
         registrationPage.clickToRegister();
         loginPage.login(username, password);
-        assertEquals("Logout", loginPage.findLogoutBtn().getText());
+        String actual = loginPage.getLogoutBtnText();
+        assertEquals("Logout", actual);
     }
 
     @Test
@@ -48,7 +49,7 @@ class RegistrationPageTest extends BaseTest {
         registrationPage.fillTheUserPassword(System.getenv("PASSWORD"));
         registrationPage.clickToRegister();
         homePage.navigateToLoginPage();
-        String actual = loginPage.findLoginBtn().getText();
+        String actual = loginPage.getLoginBtnText();
         assertEquals("LOGIN", actual);
     }
 
@@ -59,7 +60,8 @@ class RegistrationPageTest extends BaseTest {
         String password = registrationPage.fillTheUserPassword(System.getenv("PASSWORD"));
         assertTrue(registrationPage.clickToRegister());
         loginPage.login(username, password);
-        assertNotEquals("Logout", loginPage.findLogoutBtn().getText());
+        String actual = loginPage.getLogoutBtnText();
+        assertNotEquals("Logout", actual);
     }
 
     @ParameterizedTest
@@ -70,6 +72,7 @@ class RegistrationPageTest extends BaseTest {
         String password = registrationPage.fillTheUserPassword(inputPassword);
         registrationPage.clickToRegister();
         loginPage.login(username, password);
-        assertEquals("Logout", loginPage.findLogoutBtn().getText());
+        String actual = loginPage.getLogoutBtnText();
+        assertEquals("Logout", actual);
     }
 }

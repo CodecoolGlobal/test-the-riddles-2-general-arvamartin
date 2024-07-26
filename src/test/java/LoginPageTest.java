@@ -32,12 +32,14 @@ public class LoginPageTest extends BaseTest {
     @Test
     public void testLoginProcessWithRegisteredCredentials() {
         loginPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
-        assertEquals("Logout", loginPage.findLogoutBtn().getText());
+        String actual = loginPage.getLogoutBtnText();
+        assertEquals("Logout", actual);
     }
 
     @Test
     public void testLoginProcessWithUnRegisteredCredentials() {
         loginPage.login(UNREGISTERED_USERNAME, UNREGISTERED_PASSWORD);
-        assertNotEquals("Logout", loginPage.findLogoutBtn().getText());
+        String actual = loginPage.getLogoutBtnText();
+        assertNotEquals("Logout", actual);
     }
 }

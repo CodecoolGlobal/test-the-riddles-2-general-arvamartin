@@ -44,12 +44,14 @@ public class LoginPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(loginBtn)).click();
     }
 
-    public WebElement findLogoutBtn() {
-        return wait.until(ExpectedConditions.visibilityOf(logoutBtn));
+    public String getLogoutBtnText() {
+        wait.until(ExpectedConditions.visibilityOf(logoutBtn));
+        return logoutBtn.getText();
     }
 
-    public WebElement findLoginBtn() {
-        return wait.until(ExpectedConditions.visibilityOf(loginBtn));
+    public String getLoginBtnText() {
+        wait.until(ExpectedConditions.visibilityOf(loginBtn));
+        return loginBtn.getText();
     }
 
     public void clickOnLogoutBtn() {

@@ -33,7 +33,7 @@ class StayLoggedInTest extends BaseTest {
         Thread.sleep(SLEEP_TIME);
         driver.navigate().refresh();
         Thread.sleep(SLEEP_TIME);
-        String actual = loginPage.findLogoutBtn().getText();
+        String actual = loginPage.getLogoutBtnText();
         assertEquals("Logout", actual);
     }
 
@@ -41,7 +41,7 @@ class StayLoggedInTest extends BaseTest {
     void testOpenNewTabAndStayedLoggedIn() throws InterruptedException {
         ((JavascriptExecutor) driver).executeScript("window.open('http://localhost:3000/','_blank');");
         Thread.sleep(SLEEP_TIME);
-        String actual = loginPage.findLogoutBtn().getText();
+        String actual = loginPage.getLogoutBtnText();
         assertEquals("Logout", actual);
     }
 }

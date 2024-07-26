@@ -75,13 +75,14 @@ public class QuizFormPage extends BasePage{
         wait.until(ExpectedConditions.elementToBeClickable(checkBoxTwo)).click();
     }
 
-    public WebElement getCheckBoxOne() {
-        return checkBoxOne;
+    public boolean isCheckBoxOneSelected() {
+        return checkBoxOne.isSelected();
     }
 
-    public WebElement getCheckBoxTwo() {
-        return checkBoxTwo;
+    public boolean isCheckBoxTwoSelected() {
+        return checkBoxTwo.isSelected();
     }
+
 
     public void setTimer(String time) {
         wait.until(ExpectedConditions.elementToBeClickable(timer)).clear();
@@ -91,16 +92,17 @@ public class QuizFormPage extends BasePage{
     public void clickOnSaveBtn() {
         wait.until(ExpectedConditions.elementToBeClickable(saveBtn)).click();
     }
-    public WebElement getTimer() {
-        return  timer;
+    public String getTimer() {
+        wait.until(ExpectedConditions.visibilityOf(timer));
+        return  timer.getAttribute("value");
     }
 
     public String checkQuestionNumber() {
         return questionNumber.getText();
     }
 
-    public WebElement getQuestionNumberField() {
-        return questionNumber;
+    public String getQuestionNumberFromField() {
+        return questionNumber.getText();
     }
 
 }
