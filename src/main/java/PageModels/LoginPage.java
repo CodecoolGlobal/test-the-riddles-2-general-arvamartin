@@ -26,10 +26,11 @@ public class LoginPage extends BasePage {
         fillTheUsername(username);
         fillThePassword(password);
         clickOnLoginBtn();
+        sleep(SecondsOfSleep.THREE_SECONDS);
     }
 
     public void fillTheUsername(String username) {
-        sleep(SecondsOfSleep.THREE_SECONDS.getMilliseconds());
+        sleep(SecondsOfSleep.THREE_SECONDS);
         wait.until(ExpectedConditions.visibilityOf(usernameInput));
         usernameInput.sendKeys(username);
     }

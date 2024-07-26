@@ -1,6 +1,7 @@
 import PageModels.HomePage;
 import PageModels.LoginPage;
 import PageModels.MyQuizzesPage;
+import PageModels.QuizFormPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,13 +10,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class QuestionTimerTest extends BaseTest {
     private MyQuizzesPage myQuizzesPage;
+    private QuizFormPage quizFormPage;
     private LoginPage loginPage;
     private HomePage homePage;
     private String userName = System.getenv("USER_NAME");
     private String password = System.getenv("PASSWORD");
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws InterruptedException {
         initializeWebDriver();
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
@@ -23,9 +25,9 @@ public class QuestionTimerTest extends BaseTest {
         myQuizzesPage = new MyQuizzesPage(driver);
         homePage.navigateToLoginPage();
         loginPage.login(userName, password);
-        myQuizzesPage.clickOnMyQuizzesBtn();
+        homePage.navigateToMyQuizPage();
         myQuizzesPage.clickOnAddQuizBtn();
-        myQuizzesPage.clickOnAddQuestionBtn();
+        quizFormPage.clickOnAddQuestionBtn();
     }
 
     @AfterEach
@@ -36,8 +38,8 @@ public class QuestionTimerTest extends BaseTest {
     @Test
     void userCanSetTime() {
         String expected = "15";
-        myQuizzesPage.setTimer(expected);
-        String actual = myQuizzesPage.getTimer().getAttribute("value");
+        quizFormPage.setTimer(expected);
+        String actual = quizFormPage.getTimer().getAttribute("value");
         assertEquals(expected, actual);
     }
 
@@ -45,16 +47,16 @@ public class QuestionTimerTest extends BaseTest {
     void userCannotSetNegativeTime() {
         String time = "-15";
         String expected = "0";
-        myQuizzesPage.setTimer(time);
-        String actual = myQuizzesPage.getTimer().getAttribute("value");
+        quizFormPage.setTimer(time);
+        String actual = quizFormPage.getTimer().getAttribute("value");
         assertEquals(expected, actual);
     }
 
     @Test
     void onlyNumbersCanBeAcceptedAsTime() {
         String letter = "m";
-        myQuizzesPage.setTimer(letter);
-        String actual = myQuizzesPage.getTimer().getAttribute("value");
+        quizFormPage.setTimer(letter);
+        String actual = quizFormPage.getTimer().getAttribute("value");
         assertNotEquals(letter, actual);
     }
 }

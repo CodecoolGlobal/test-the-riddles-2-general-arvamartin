@@ -1,6 +1,7 @@
 import PageModels.HomePage;
 import PageModels.LoginPage;
 import PageModels.MyQuizzesPage;
+import PageModels.QuizFormPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class MyQuizzesPageTest extends BaseTest {
 
     private MyQuizzesPage myQuizzesPage;
+    private QuizFormPage quizFormPage;
     private LoginPage loginPage;
     private HomePage homePage;
 
@@ -36,8 +38,8 @@ class MyQuizzesPageTest extends BaseTest {
     @Test
     public void userCanCreateQuizzes() {
         myQuizzesPage.clickOnAddQuizBtn();
-        myQuizzesPage.clickOnAddQuestionBtn();
-        myQuizzesPage.fillAndSaveTheQuestionModal("test", "test", "test");
+        quizFormPage.clickOnAddQuestionBtn();
+        quizFormPage.fillAndSaveTheQuestionModal("test", "test", "test");
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         String alertText = alert.getText();
         assertEquals("Save new task?", alertText);
@@ -55,7 +57,7 @@ class MyQuizzesPageTest extends BaseTest {
 
     @Test
     public void userCanModifyTitleOfExistingQuizzes() {
-        myQuizzesPage.modifyQuizTitle("new-test");
+        quizFormPage.modifyQuizTitle("new-test");
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         String alertText = alert.getText();
         assertEquals("Save changes?", alertText);
@@ -64,7 +66,7 @@ class MyQuizzesPageTest extends BaseTest {
 
     @Test
     public void userCanModifyTitleOfExistingQuestions() {
-        myQuizzesPage.modifyQuestion("newQuestionTitle");
+        quizFormPage.modifyQuestion("newQuestionTitle");
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         String alertText = alert.getText();
         assertEquals("Save changes?", alertText);

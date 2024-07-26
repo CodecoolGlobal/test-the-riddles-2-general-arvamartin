@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
+import Enum.SecondsOfSleep;
 
 public abstract class BasePage {
 
@@ -17,9 +18,9 @@ public abstract class BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    protected void sleep(int milliseconds) {
+    protected void sleep(SecondsOfSleep secondsOfSleep) {
         try {
-            Thread.sleep(milliseconds);
+            Thread.sleep(secondsOfSleep.getMilliseconds());
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             throw new RuntimeException("Thread was interrupted", e);

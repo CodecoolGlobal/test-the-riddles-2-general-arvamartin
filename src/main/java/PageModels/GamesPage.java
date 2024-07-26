@@ -29,7 +29,7 @@ public class GamesPage extends BasePage {
     }
 
     public void joinGameLobby(String lobbyTitle) {
-        sleep(SecondsOfSleep.ONE_SECOND.getMilliseconds());
+        sleep(SecondsOfSleep.ONE_SECOND);
         wait.until(ExpectedConditions.visibilityOfAllElements(lobbyContainers));
         for (WebElement lobbyContainer : lobbyContainers) {
             WebElement lobbyNameElement = lobbyContainer.findElement(By.xpath(".//span[@class='grow flex align-middle text-lg pl-2 items-center']"));
@@ -43,7 +43,7 @@ public class GamesPage extends BasePage {
     }
 
     public void joinGame() {
-        sleep(SecondsOfSleep.ONE_SECOND.getMilliseconds());
+        sleep(SecondsOfSleep.ONE_SECOND);
         wait.until(ExpectedConditions.elementToBeClickable(joinGameBtn)).click();
     }
 

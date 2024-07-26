@@ -60,7 +60,8 @@ public class GamePageTest extends BaseTest {
 
     @Test
     void testPlayingGame() {
-        myQuizzesPage.clickOnMyQuizzesBtn();
+        homePage1.navigateToMyQuizPage();
+        homePage2.navigateToMyQuizPage();
         myQuizzesPage.createLobby();
         gamesPage.navigateToGamesPage();
         gamesPage.joinGameLobby("test12");
