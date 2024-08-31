@@ -1,5 +1,13 @@
 # Test the riddles
 
+# System Under Testing (SUT)
+
+<img src="sut_img.png" alt="sut.png" width="700"/>;
+
+# All test results
+
+<img src="all_tests.png" alt="all_tests.png" width="700"/>;
+
 # Overview
 This project contains automated tests for the Reptile Riddles 1.5.1 quizz game application using Selenium. The tests cover various functionalities of the application, such as user registration, login, quizz management, and responsiveness of the user interface.
 
