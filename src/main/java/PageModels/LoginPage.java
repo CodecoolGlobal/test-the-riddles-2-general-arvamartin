@@ -21,7 +21,6 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-
     public void login(String username, String password) {
         fillTheUsername(username);
         fillThePassword(password);

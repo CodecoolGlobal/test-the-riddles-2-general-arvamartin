@@ -3,6 +3,8 @@
 # Overview
 This project contains automated tests for the Reptile Riddles 1.5.1 quizz game application using Selenium. The tests cover various functionalities of the application, such as user registration, login, quizz management, and responsiveness of the user interface.
 
+**System Under Test (SUT):** [Reptile Riddles 1.5.1 GitHub Repository](https://github.com/CodecoolGlobal/reptile-riddles-2-general-arvamartin)
+
 ## Table of Contents
 - [Team Members](#team-members)
 - [Technologies](#technologies)
@@ -41,7 +43,7 @@ Before running the tests, ensure you have the following installed:
 personalize 
     - userCanRegisterAndLoginWithChosenCredentials
     - userCanRegisterOnlyWithProperEmailAddress
-    - createQuizWithValidInputFields
+    - userCanRegisterwithSpecialCharacters
 
 2. As a user, I want an option to stay logged in, so that I don’t have to enter my credentials every 
 time.
@@ -89,9 +91,7 @@ played and they can join in.
 
 
 ## Bug report
-The project currently has the following known issues:
-![alt text](image-1.png)
-These issues are listed in the project's task board in the "TO DO" column and are awaiting resolution.
+**For detailed information about the bugs founded: [bug-report.md](bug-report.md)**
 
 ## Test Details
 ### StayLoggedInTest
@@ -110,7 +110,7 @@ These issues are listed in the project's task board in the "TO DO" column and ar
 * Tests:
     - userCanRegisterAndLoginWithChosenCredentials: Registers and logs in a user.
     - userCanRegisterOnlyWithProperEmailAddress: Tests registration with an invalid email.
-    - createQuizWithValidInputFields: Parameterized test for registration using CSV data.
+    - userCanRegisterwithSpecialCharacters: Parameterized test for registration using CSV data.
 ### QuestionTimerTest
 * Purpose: Tests setting timers for questions.
 * Tests:

@@ -6,7 +6,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -41,7 +40,7 @@ class MyQuizzesPageTest extends BaseTest {
         myQuizzesPage.clickOnAddQuizBtn();
         quizFormPage.clickOnAddQuestionBtn();
         quizFormPage.fillAndSaveTheQuestionModal("test", "test", "test");
-        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        Alert alert = quizFormPage.getAlert();
         String alertText = alert.getText();
         assertEquals("Save new task?", alertText);
         alert.accept();
@@ -50,7 +49,7 @@ class MyQuizzesPageTest extends BaseTest {
     @Test
     public void userCanDeleteQuizzes() {
         myQuizzesPage.deleteQuiz();
-        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        Alert alert = quizFormPage.getAlert();
         String alertText = alert.getText();
         assertEquals("Delete?", alertText);
         alert.accept();
@@ -59,7 +58,7 @@ class MyQuizzesPageTest extends BaseTest {
     @Test
     public void userCanModifyTitleOfExistingQuizzes() {
         quizFormPage.modifyQuizTitle("new-test");
-        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        Alert alert = quizFormPage.getAlert();
         String alertText = alert.getText();
         assertEquals("Save changes?", alertText);
         alert.accept();
@@ -68,7 +67,7 @@ class MyQuizzesPageTest extends BaseTest {
     @Test
     public void userCanModifyTitleOfExistingQuestions() {
         quizFormPage.modifyQuestion("newQuestionTitle");
-        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        Alert alert = quizFormPage.getAlert();
         String alertText = alert.getText();
         assertEquals("Save changes?", alertText);
         alert.accept();

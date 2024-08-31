@@ -6,10 +6,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -29,7 +25,6 @@ public class ChooseCorrectAnswerTest extends BaseTest {
         homePage.openTheApp();
         myQuizzesPage = new MyQuizzesPage(driver);
         quizFormPage = new QuizFormPage(driver);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(3));
         homePage.navigateToLoginPage();
         loginPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
         homePage.navigateToMyQuizPage();
@@ -64,8 +59,7 @@ public class ChooseCorrectAnswerTest extends BaseTest {
         String expected = quizFormPage.getQuestionNumberFromField();
         quizFormPage.clickOnAddQuestionBtn();
         quizFormPage.clickOnSaveBtn();
-        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
-        alert.accept();
+        quizFormPage.getAlert().accept();
         assertEquals(expected, quizFormPage.checkQuestionNumber());
     }
 }

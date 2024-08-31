@@ -2,6 +2,7 @@ package PageModels;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import Enum.SecondsOfSleep;
 
 
 public class HomePage extends BasePage {
@@ -32,6 +33,7 @@ public class HomePage extends BasePage {
     public void navigateToRegistrationPage() {
         driver.get(REGISTRATION_PAGE_URL);
     }
+
     public void navigateToMyQuizPage() {
         driver.get(MY_QUIZ_PAGE_URL);
     }
