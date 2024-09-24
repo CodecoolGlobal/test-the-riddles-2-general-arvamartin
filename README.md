@@ -9,7 +9,7 @@
 <img src="all_tests.png" alt="all_tests.png" width="700"/>;
 
 # Overview
-This project contains automated tests for the Reptile Riddles 1.5.1 quizz game application using Selenium. The tests cover various functionalities of the application, such as user registration, login, quizz management, and responsiveness of the user interface.
+This project contains automated tests for the Reptile Riddles 1.5.1 quiz game application using Selenium. The tests cover various functionalities of the application, such as user registration, login, quizz management, and responsiveness of the user interface.
 
 **System Under Test (SUT):** [Reptile Riddles 1.5.1 GitHub Repository](https://github.com/CodecoolGlobal/reptile-riddles-2-general-arvamartin)
 
@@ -23,8 +23,8 @@ This project contains automated tests for the Reptile Riddles 1.5.1 quizz game a
 
 ## Team Members
 
-- [Mészáros Ádám](https://github.com/adesz0112)
-- [Árva Martin](https://github.com/arvamartin)
+- [![Ádám Mészáros](https://img.shields.io/badge/M%C3%A9sz%C3%A1ros%20%C3%81d%C3%A1m-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/adesz0112)
+- [![Martin Árva](https://img.shields.io/badge/%C3%81rva%20Martin-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/arvamartin)
 
 ## Technologies
 The following technologies and tools are used in this project:
@@ -33,18 +33,29 @@ The following technologies and tools are used in this project:
 * Selenium: A web testing framework used to automate browser interactions.
 * JUnit: A testing framework for Java used to write and run tests.
 * Apache Maven: A build automation tool used for project management and dependency management.
-* WebDriver: A tool for controlling web browsers (in this case, Microsoft Edge(126.0.2592.113)).
+* Selenium WebDriver: A tool for controlling web browsers (in this case, Microsoft Edge(126.0.2592.113)).
 
 
 ## Prerequisites
 Before running the tests, ensure you have the following installed:
 
-* Java Development Kit (JDK) 8 or higher
-* Apache Maven
-* WebDriver for the browsers you wish to test (Edge in this case (Version: 126.0.2592.113))
-* Environment variables set for usernames and passwords: **You must register your own credentials first**
+* [![Java][Java]][java-url]
+* [![Maven][Maven]][maven.url]
+* [![Selenium][Selenium]][selenium-url]
+* ![Environment variables][Environment] set for username, email and password: **You must register your own credentials in the SUT application first**
 
-
+    - Option 1: Using PowerShell:
+   ```bash
+   $env:USER_NAME="YOUR_USER_NAME"
+   $env:EMAIL="YOUR_EMAIL"
+   $env:PASSWORD="YOUR_PASSWORD"
+   ```
+    -  Option 2: Using Command Prompt:
+   ```bash
+   set USER_NAME=YOUR_USER_NAME
+   set EMAIL=YOUR_EMAIL
+   set PASSWORD=YOUR_PASSWORD
+    ```
 
 ## User stories and their tests
 1. As a new user, I want to choose my own username and password during registration, so that I can 
@@ -149,3 +160,13 @@ played and they can join in.
 * Tests:
     - testLoginProcessWithRegisteredCredentials: Verifies login with valid credentials.
     - testLoginProcessWithUnRegisteredCredentials: Ensures login fails with invalid credentials.
+
+
+[Java]:https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white
+[java-url]:https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html
+[Maven]:https://img.shields.io/badge/-maven-darkgreen?style=for-the-badge&logo=maven&logoColor=white
+[maven.url]: https://maven.apache.org/download.cgi
+[Selenium]: https://img.shields.io/badge/-selenium-CB02A?style=for-the-badge&logo=selenium&logoColor=white
+[selenium-url]:https://www.selenium.dev/
+[Environment]:https://img.shields.io/badge/environment-variables-blue?style=for-the-badge
+
